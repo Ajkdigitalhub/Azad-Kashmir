@@ -764,59 +764,18 @@
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
         // Single Page View Router
-        // 1. Single Page View Router (Updated with Hash support)
-function switchView(viewName, updateHash = true) {
-    // Hide all views
-    document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-    
-    // Show target view
-    const target = document.getElementById('view-' + viewName);
-    if(target) {
-        target.classList.add('active');
-    } else {
-        // Fallback to home agar view na mile
-        viewName = 'home';
-        document.getElementById('view-home').classList.add('active');
-    }
+        function switchView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            // Show target view
+            const target = document.getElementById('view-' + viewName);
+            if(target) target.classList.add('active');
 
-    // Update nav active styles
-    document.querySelectorAll('.nav-link').forEach(btn => {
-        btn.classList.remove('text-emerald-400', 'font-semibold');
-        btn.classList.add('text-slate-300');
-    });
-    const activeNav = document.getElementById('nav-' + viewName);
-    if(activeNav) {
-        activeNav.classList.remove('text-slate-300');
-        activeNav.classList.add('text-emerald-400', 'font-semibold');
-    }
-
-    // URL mein hash save karein taake refresh par yaad rahe
-    if(updateHash) {
-        window.location.hash = viewName;
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// 2. Page load ya refresh hone par check karein ke kaunsa view kholna hai
-window.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash.replace('#', '');
-    if(hash) {
-        switchView(hash, false);
-    } else {
-        switchView('home', false);
-    }
-});
-
-// Agar koi user browser ke back/forward buttons dabaye toh uske liye
-window.addEventListener('popstate', () => {
-    const hash = window.location.hash.replace('#', '');
-    if(hash) {
-        switchView(hash, false);
-    } else {
-        switchView('home', false);
-    }
-});
+            // Update nav active styles
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('text-emerald-400', 'font-semibold');
+                btn.classList.add('text-slate-300');
+            });
             const activeNav = document.getElementById('nav-' + viewName);
             if(activeNav) {
                 activeNav.classList.remove('text-slate-300');
