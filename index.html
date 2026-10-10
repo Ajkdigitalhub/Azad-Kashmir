@@ -1,955 +1,220 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kashmir Hub - AJK Official Information & Emergency Portal</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        emeraldBrand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
-                        },
-                        alpine: {
-                            dark: '#0f172a',
-                            card: '#1e293b',
-                            border: '#334155'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
-        }
-        .hero-gradient {
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.85) 70%, #0f172a 100%);
-        }
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
-        .animate-ticker {
-            display: inline-flex;
-            white-space: nowrap;
-            animation: ticker 35s linear infinite;
-        }
-        .animate-ticker:hover {
-            animation-play-state: paused;
-        }
-        .view-section {
-            display: none;
-        }
-        .view-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body class="bg-alpine-dark text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white min-h-screen flex flex-col justify-between">
-
-    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-alpine-border transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" onclick="switchView('home'); return false;" class="flex items-center gap-3 group">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-900/30 group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-mountain-sun text-white text-xl"></i>
-                </div>
-                <div>
-                    <span class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                        Kashmir Hub <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">AJK Official</span>
-                    </span>
-                    <span class="text-xs text-slate-400 block">Tourism, Health & Emergency Directory</span>
-                </div>
-            </a>
-
-            <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center gap-6 font-medium text-sm">
-                <button onclick="switchView('home')" id="nav-home" class="nav-link text-emerald-400 font-semibold transition-colors py-2 px-3 rounded-lg hover:bg-slate-800/50">Home</button>
-                <button onclick="switchView('districts')" id="nav-districts" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors py-2 px-3 rounded-lg hover:bg-slate-800/50">Districts Hub</button>
-                <button onclick="switchView('hospitals')" id="nav-hospitals" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors py-2 px-3 rounded-lg hover:bg-slate-800/50">Hospitals & Emergency</button>
-                <button onclick="switchView('tourism')" id="nav-tourism" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors py-2 px-3 rounded-lg hover:bg-slate-800/50">Tourism & Valleys</button>
-                <button onclick="switchView('contact')" id="nav-contact" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors py-2 px-3 rounded-lg hover:bg-slate-800/50">Contact & Support</button>
-            </nav>
-
-            <!-- Emergency Quick Button & Mobile Menu Toggle -->
-            <div class="flex items-center gap-3">
-                <a href="tel:1122" class="hidden sm:flex items-center gap-2 bg-rose-600/90 hover:bg-rose-700 text-white px-4 py-2.5 rounded-xl font-semibold text-sm shadow-lg shadow-rose-900/40 transition-all hover:scale-105">
-                    <i class="fa-solid fa-phone-volume animate-pulse"></i>
-                    <span>Rescue 1122</span>
-                </a>
-                <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white">
-                    <i class="fa-solid fa-bars text-lg"></i>
-                </button>
-            </div>
-        </div>
-
-        <div id="mobile-menu" class="hidden lg:hidden glass-nav border-b border-alpine-border px-6 py-4 space-y-2">
-            <button onclick="switchView('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg text-slate-300 hover:text-emerald-400 hover:bg-slate-800/50 font-medium">Home</button>
-            <button onclick="switchView('districts'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg text-slate-300 hover:text-emerald-400 hover:bg-slate-800/50 font-medium">Districts Hub</button>
-            <button onclick="switchView('hospitals'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg text-slate-300 hover:text-emerald-400 hover:bg-slate-800/50 font-medium">Hospitals & Emergency</button>
-            <button onclick="switchView('tourism'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg text-slate-300 hover:text-emerald-400 hover:bg-slate-800/50 font-medium">Tourism & Valleys</button>
-            <button onclick="switchView('contact'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg text-slate-300 hover:text-emerald-400 hover:bg-slate-800/50 font-medium">Contact & Support</button>
-            <div class="pt-2">
-                <a href="tel:1122" class="w-full flex items-center justify-center gap-2 bg-rose-600 text-white py-3 rounded-xl font-semibold">
-                    <i class="fa-solid fa-phone-volume"></i> Emergency Rescue 1122
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <div class="bg-slate-950 border-y border-alpine-border py-3 overflow-hidden relative shadow-inner mt-20 z-40">
-        <div class="flex items-center">
-            <div class="bg-rose-600 text-white px-4 py-1.5 font-bold text-xs uppercase tracking-wider flex items-center gap-2 z-10 shadow-lg shrink-0 ml-4 rounded-lg">
-                <i class="fa-solid fa-triangle-exclamation"></i> Emergency Helplines
-            </div>
-            <div class="overflow-hidden whitespace-nowrap w-full">
-                <div class="animate-ticker flex items-center gap-12 text-sm text-slate-300 font-medium">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-emerald-400"></i> Rescue 1122: <a href="tel:1122" class="text-white font-bold hover:underline">1122</a></span>
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-shield text-emerald-400"></i> AJK Tourist Police: <a href="tel:1422" class="text-white font-bold hover:underline">05822-920111</a></span>
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-cloud-sun-rain text-emerald-400"></i> SDMA Weather & Disaster: <a href="tel:05822921643" class="text-white font-bold hover:underline">05822-921623</a></span>
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-hospital text-emerald-400"></i> Health Department AJK: <a href="tel:05822920015" class="text-white font-bold hover:underline">05822-920202</a></span>
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-road text-emerald-400"></i> AJK Traffic Police: <a href="tel:05822930826" class="text-white font-bold hover:underline">05822-920333</a></span>
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-emerald-400"></i> Rescue 1122: <a href="tel:1122" class="text-white font-bold hover:underline">1122</a></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN APP VIEWS CONTAINER -->
-    <main class="flex-grow">
-
-        <!-- ================= VIEW 1: HOME VIEW ================= -->
-        <div id="view-home" class="view-section active">
-            <!-- Hero Section -->
-            <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-                <div class="absolute inset-0 z-0">
-                    <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMVtF0AfjjRrf2gjj6vmtoFdp5UKYs4NZLDdBNyCSexn74U9eRMqisio&s=10?auto=format&fit=crop&w=1920&q=80');"></div>
-                    <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: url('https://i.ytimg.com/vi/gn41AiFNpag/sddefault.jpg?auto=format&fit=crop&w=1920&q=80');"></div>
-                    <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRImwy1VzSezfBPQ46mZkPIVlHrMqx4DFfi1C7l1AmCTyRCTlE_P1VYVcPh&s=10?auto=format&fit=crop&w=1920&q=80');"></div>
-                    <div class="absolute inset-0 hero-gradient"></div>
-                </div>
-
-                <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-medium mb-6 backdrop-blur-md">
-                        <i class="fa-solid fa-shield-halved"></i> Official Azad Jammu & Kashmir Portal
-                    </div>
-                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-                        Discover the Paradise of <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Kashmir</span>
-                    </h1>
-                    <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10 font-normal">
-                        Your ultimate digital companion for all 10 districts, 24/7 DHQ/THQ healthcare directories, emergency helplines, and breathtaking mountain destinations.
-                    </p>
-
-                    <!-- Quick Search Box -->
-                    <div class="max-w-3xl mx-auto glass-card p-3 sm:p-4 rounded-2xl shadow-2xl mb-8">
-                        <div class="flex flex-col md:flex-row gap-3">
-                            <div class="flex-1 flex items-center gap-3 bg-slate-900/80 px-4 py-3 rounded-xl border border-slate-700/80">
-                                <i class="fa-solid fa-magnifying-glass text-emerald-400"></i>
-                                <input type="text" id="home-search" placeholder="Search hospitals, districts, or valleys..." class="bg-transparent border-none outline-none text-white w-full placeholder-slate-400 text-sm sm:text-base">
-                            </div>
-                            <button onclick="handleHomeSearch()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-2">
-                                <span>Search Portal</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Quick-Jump Pills -->
-                    <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-medium">
-                        <span class="text-slate-400 mr-2"><i class="fa-solid fa-bolt text-amber-400"></i> Explore:</span>
-                        <button onclick="switchView('districts')" class="px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-emerald-600/20 hover:border-emerald-500/50 border border-slate-700 transition-all text-slate-300">📍 10 Districts Hub</button>
-                        <button onclick="switchView('hospitals')" class="px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-emerald-600/20 hover:border-emerald-500/50 border border-slate-700 transition-all text-slate-300">🏥 DHQ/THQ Hospitals</button>
-                        <button onclick="switchView('tourism')" class="px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-emerald-600/20 hover:border-emerald-500/50 border border-slate-700 transition-all text-slate-300">🏔️ Top Valleys</button>
-                        <button onclick="switchView('contact')" class="px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-emerald-600/20 hover:border-emerald-500/50 border border-slate-700 transition-all text-slate-300">📞 Emergency Contacts</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Featured Destinations Preview -->
-            <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                    <div>
-                        <span class="text-emerald-400 font-semibold text-sm tracking-wider uppercase">Breathtaking Landscapes</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">Featured Tourist Destinations</h2>
-                    </div>
-                    <button onclick="switchView('tourism')" class="mt-4 md:mt-0 text-emerald-400 hover:text-emerald-300 font-semibold text-sm flex items-center gap-2">
-                        <span>View All Destinations</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="glass-card rounded-2xl overflow-hidden group hover:border-emerald-500/50 transition-all duration-300 shadow-xl flex flex-col">
-                        <div class="relative h-60 overflow-hidden">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR5mZc0o0KykemyB_JRbXx2M8YMp4EnX3zbDmiT_83-4pIarprbbny4qD3&s=10?auto=format&fit=crop&w=800&q=80" alt="Ratti Gali" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Neelum Valley</div>
-                        </div>
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-2">Ratti Gali Lake</h3>
-                                <p class="text-slate-400 text-sm line-clamp-2">An alpine glacial lake fed by melting snow peaks, surrounded by wildflowers.</p>
-                            </div>
-                            <button onclick="switchView('tourism')" class="mt-6 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white font-medium text-sm transition-colors border border-slate-700">Explore Guide</button>
-                        </div>
-                    </div>
-
-                   <div class="glass-card rounded-2xl overflow-hidden group hover:border-emerald-500/50 transition-all duration-300 shadow-xl flex flex-col">
-                        <div class="relative h-60 overflow-hidden">
-                            <img src="https://banjosa.org/wp-content/uploads/2023/05/banjosa-lake-thumbb.jpg?auto=format&fit=crop&w=800&q=80" alt="Banjosa Lake" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Poonch</div>
-                        </div>
-
-
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-2">Banjosa Lake</h3>
-                                <p class="text-slate-400 text-sm line-clamp-2">An artificial scenic lake set amidst dense pine forests, ideal for boating.</p>
-                            </div>
-                            <button onclick="switchView('tourism')" class="mt-6 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white font-medium text-sm transition-colors border border-slate-700">Explore Guide</button>
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-2xl overflow-hidden group hover:border-emerald-500/50 transition-all duration-300 shadow-xl flex flex-col">
-                        <div class="relative h-60 overflow-hidden">
-                            <img src="https://www.pakistanhc.lk/wp-content/uploads/2019/01/places-to-visit-in-Muzaffarabad-pir-chinasi-min-5-960x640.jpg?auto=format&fit=crop&w=800&q=80" alt="Pir Chinasi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Muzaffarabad</div>
-                        </div>
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-2">Pir Chinasi</h3>
-                                <p class="text-slate-400 text-sm line-clamp-2">A breathtaking mountain ridge offering panoramic views of valleys.</p>
-                            </div>
-                            <button onclick="switchView('tourism')" class="mt-6 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white font-medium text-sm transition-colors border border-slate-700">Explore Guide</button>
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-2xl overflow-hidden group hover:border-emerald-500/50 transition-all duration-300 shadow-xl flex flex-col">
-                        <div class="relative h-60 overflow-hidden">
-                            <img src="https://farm6.staticflickr.com/5456/9323737303_7fd59feee8_b.jpg?auto=format&fit=crop&w=800&q=80" alt="Shounter Valley" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Neelum Valley</div>
-                        </div>
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-2">Shounter Valley</h3>
-                                <p class="text-slate-400 text-sm line-clamp-2">A picturesque sub-valley known for its crystal streams and glacier crossings.</p>
-                            </div>
-                            <button onclick="switchView('tourism')" class="mt-6 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white font-medium text-sm transition-colors border border-slate-700">Explore Guide</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ================= VIEW 2: DISTRICTS HUB VIEW ================= -->
-        <div id="view-districts" class="view-section">
-            <section class="py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <span class="text-emerald-400 font-semibold text-sm tracking-wider uppercase">Administrative Divisions</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-1">All 10 Districts of Azad Kashmir</h2>
-                    <p class="text-slate-400 mt-3 text-base">Explore complete profiles for all 10 districts, including their capitals, population statistics, local administration contacts, and DHQ information.</p>
-                </div>
-
-                <!-- Districts Grid -->
-                <div id="full-districts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Populated via JS -->
-                </div>
-            </section>
-        </div>
-
-        <!-- ================= VIEW 3: HOSPITALS & EMERGENCY VIEW ================= -->
-        <div id="view-hospitals" class="view-section">
-            <section class="py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span class="text-emerald-400 font-semibold text-sm tracking-wider uppercase">Medical & Emergency Infrastructure</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-1">DHQ & THQ Hospitals Directory</h2>
-                    <p class="text-slate-400 mt-3 text-base">Search through District Headquarters (DHQ) and Tehsil Headquarters (THQ) hospitals across AJK with tap-to-call landlines.</p>
-                </div>
-
-                <!-- Filter Controls -->
-                <div class="glass-card p-4 sm:p-6 rounded-2xl mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
-                    <div class="relative w-full md:w-96">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
-                        <input type="text" id="hospital-search" onkeyup="filterHospitalsView()" placeholder="Filter by hospital name, city, or district..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-slate-400 outline-none focus:border-emerald-500">
-                    </div>
-                    <div class="flex items-center gap-3 w-full md:w-auto">
-                        <select id="hospital-level-filter" onchange="filterHospitalsView()" class="bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 outline-none focus:border-emerald-500 w-full md:w-auto">
-                            <option value="ALL">All Hospital Levels</option>
-                            <option value="DHQ">DHQ (District Headquarter)</option>
-                            <option value="THQ">THQ (Tehsil Headquarter)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Hospitals Table -->
-                <div class="glass-card rounded-2xl overflow-hidden shadow-2xl">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="border-b border-alpine-border bg-slate-900/80 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                                    <th class="py-4 px-6">Hospital Name</th>
-                                    <th class="py-4 px-6">District</th>
-                                    <th class="py-4 px-6">Level</th>
-                                    <th class="py-4 px-6">Facilities & Trauma</th>
-                                    <th class="py-4 px-6">Landline / Contact</th>
-                                </tr>
-                            </thead>
-                            <tbody id="hospital-directory-body" class="divide-y divide-slate-800/60 text-sm">
-                                <!-- Populated via JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ================= VIEW 4: TOURISM & VALLEYS VIEW ================= -->
-        <div id="view-tourism" class="view-section">
-            <section class="py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <span class="text-emerald-400 font-semibold text-sm tracking-wider uppercase">Scenic Wonders & Guides</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-1">Tourism & Valleys Guide</h2>
-                    <p class="text-slate-400 mt-3 text-base">Detailed guides on alpine lakes, meadows, mountain passes, and live road status updates across Azad Jammu & Kashmir.</p>
-                </div>
-
-                <!-- Road Status Banner -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                    <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-500">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Open for All Traffic</span>
-                        <h3 class="text-xl font-bold text-white mt-3 mb-1">Neelum Valley Highway</h3>
-                        <p class="text-slate-400 text-sm">Muzaffarabad to Keran & Kel</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-2xl border-l-4 border-l-amber-500">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">Jeeps Only (4x4)</span>
-                        <h3 class="text-xl font-bold text-white mt-3 mb-1">Shounter & Ratti Gali Road</h3>
-                        <p class="text-slate-400 text-sm">Dowarian / Kel to Alpine Lakes</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-500">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Open 24/7</span>
-                        <h3 class="text-xl font-bold text-white mt-3 mb-1">Rawalakot - Poonch Highway</h3>
-                        <p class="text-slate-400 text-sm">Kohala to Rawalakot & Banjosa</p>
-                    </div>
-                </div>
-
-                <!-- Tourism Destinations Grid -->
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    
-    <!-- 1. Ratti Gali Lake -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://s0.wklcdn.com/image_169/5075682/178067643/110951130.400x300.jpg?auto=format&fit=crop&w=800&q=80" alt="Ratti Gali" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Neelum Valley &bull; 3,683m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Ratti Gali Lake</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">An alpine glacial lake fed by melting snow peaks, surrounded by vibrant wildflowers and lush green plateaus. Reachable via 4x4 jeep from Dowarian followed by a scenic 1-hour trek.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: July - Sept</span>
-                <span class="text-emerald-400 font-semibold">Verified Route</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2. Banjosa Lake -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://guidetourismpakistan.com/wp-content/uploads/2024/01/GTP_Blog_image_1024x768f_Banjosa_Lake_7.jpeg?auto=format&fit=crop&w=800&q=80" alt="Banjosa Lake" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Poonch &bull; 1,981m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Banjosa Lake</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">An artificial scenic lake set amidst dense pine forests and mountains, ideal for boating and family picnics. Located 18 km from Rawalakot city with fully paved roads.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: Year-Round</span>
-                <span class="text-emerald-400 font-semibold">Paved Access</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. Pir Chinasi -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-6CaNBKHhRM4Z_Uvt-RdiJmiJbZgTn5WRkw-6ON-lm4yJqirwqUtotC4E&s=10?auto=format&fit=crop&w=800&q=80" alt="Pir Chinasi" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Muzaffarabad &bull; 2,900m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Pir Chinasi</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">A breathtaking mountain ridge offering panoramic views of valleys, deep gorges, and mesmerizing sunset vistas. Located 30 km east of Muzaffarabad.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: May - Oct</span>
-                <span class="text-emerald-400 font-semibold">Paragliding Hub</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. Shounter Valley & Lake -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://farm6.staticflickr.com/5456/9323737303_7fd59feee8_b.jpg?auto=format&fit=crop&w=800&q=80" alt="Shounter Valley" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Neelum Valley &bull; 3,100m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Shounter Valley</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">A picturesque valley known for its glacial stream, towering peaks, and the stunning alpine Shounter Lake. A true paradise for trekkers and off-road camping enthusiasts.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: June - August</span>
-                <span class="text-emerald-400 font-semibold">Off-road Adventure</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. Arang Kel -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMdhb4DhcEvDdplPvLPMNHdXUlsK15ACWY5s1ygEqJkOoT5u7c6Y2mEkk&s=10?auto=format&fit=crop&w=800&q=80" alt="Arang Kel" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Neelum Valley &bull; 2,533m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Arang Kel</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">A lush green village perched on a hilltop in Neelum Valley, accessible via a thrilling cable car ride across the roaring Kel river followed by an enchanting forest hike.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: May - Sept</span>
-                <span class="text-emerald-400 font-semibold">Chairlift & Trek</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 6. Toli Pir -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Toli_Pir%2C_Azad_Kashmir_8.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original?auto=format&fit=crop&w=800&q=80" alt="Toli Pir" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Poonch &bull; 2,880m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Toli Pir</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">A high-altitude hilltop area serving as the apex ridge of the Poonch district, offering mesmerizing views of Abbaspur, Poonch river, and neighboring mountain ranges.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: April - Oct</span>
-                <span class="text-emerald-400 font-semibold">Sunset Point</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 7. Leepa Valley -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://beautyofpakistan.com/location/1000x500/Leepa-Valley.webp.webp?auto=format&fit=crop&w=800&q=80" alt="Leepa Valley" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Hattian Bala &bull; 1,921m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Leepa Valley</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">Famous for its traditional wooden architecture, lush walnut orchards, cascading streams, and snow-capped peaks. One of the most fascinating and culturally rich valleys in AJK.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: May - Sept</span>
-                <span class="text-emerald-400 font-semibold">Traditional Culture</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 8. Ganga Choti -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCqeldIu3B2LxP1lcxsxCZoXuMjjjymiX-FIK6mjZOVT-Zxc_MR_DYsXRL&s=10?auto=format&fit=crop&w=800&q=80" alt="Ganga Choti" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Bagh &bull; 3,044m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Ganga Choti</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">Situated in the Bagh district, this majestic peak offers a stellar hiking experience with panoramic vistas overlooking both Bagh and parts of the Mansehra valley.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: Year-Round</span>
-                <span class="text-emerald-400 font-semibold">Hiking & Camping</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 9. Ramkot Fort -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/23/ed/5e/ramkot-fort.jpg?auto=format&fit=crop&w=800&q=80" alt="Ramkot Fort" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Mirpur &bull; 400m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Ramkot Fort</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">An ancient historical fortress perched atop a cliff overlooking the massive blue waters of the Mangla Dam reservoir. Accessible via a scenic boat ride from Dadyal or Mirpur.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: Oct - April</span>
-                <span class="text-emerald-400 font-semibold">Historical Landmark</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 10. Sudhan Gali & Bagh -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://i.pinimg.com/736x/cf/3a/c4/cf3ac4e6ba2c2d15a6405ae6bc21624e.jpg?auto=format&fit=crop&w=800&q=80" alt="Sudhan Gali" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Bagh &bull; 2,133m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Sudhan Gali</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">A scenic mountain pass connecting Bagh and Poonch districts. It serves as the primary base camp for trekking expeditions toward the magnificent Ganga Choti peak.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: May - Oct</span>
-                <span class="text-emerald-400 font-semibold">Base Camp</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 11. Sharda Valley & Ruins -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Sharda_Bridge%2Cneelam_vellay18apr17.jpg?utm_source=en.wikivoyage.org&utm_campaign=index&utm_content=original?auto=format&fit=crop&w=800&q=80" alt="Sharda" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Neelum Valley &bull; 1,981m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Sharda Village & Ruins</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">A picturesque border village alongside the Neelum River, renowned for its ancient Sharda Peeth temple ruins, historic learning center heritage, and stunning valley views.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: June - Sept</span>
-                <span class="text-emerald-400 font-semibold">Ancient Heritage</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 12. Taobat -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-xl flex flex-col">
-        <div class="relative h-64 overflow-hidden">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/54/Taobat%2C_Neelum_Valley._Kashmir.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original?auto=format&fit=crop&w=800&q=80" alt="Taobat" class="w-full h-full object-cover">
-            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 border border-slate-700">Neelum Valley &bull; 2,500m</div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Taobat Village</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">The last picturesque station in the Neelum Valley where the crystal-clear Kishan Ganga river enters. Features pristine wooden cottages, emerald meadows, and ultimate tranquility.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>Best Season: July - August</span>
-                <span class="text-emerald-400 font-semibold">End of Valley</span>
-            </div>
-        </div>
-    </div>
-
-</div>
-            </section>
-        </div>
-
-        <!-- ================= VIEW 5: CONTACT & SUPPORT VIEW ================= -->
-        <div id="view-contact" class="view-section">
-            <section class="py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <span class="text-emerald-400 font-semibold text-sm tracking-wider uppercase">Official Help & Inquiries</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-1">Contact & Emergency Support</h2>
-                    <p class="text-slate-400 mt-3 text-base">Reach out to government departments, disaster management authorities, or submit feedback regarding landline numbers.</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <!-- Emergency Helpline Cards -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-white mb-4"><i class="fa-solid fa-phone-volume text-rose-500 mr-2"></i> Primary Emergency Contacts</h3>
-                        
-                        <div class="glass-card p-5 rounded-2xl flex items-center justify-between">
-                            <div>
-                                <h4 class="text-white font-bold">Rescue 1122 (AJK)</h4>
-                                <p class="text-xs text-slate-400">Emergency Ambulance & Disaster Rescue</p>
-                            </div>
-                            <a href="tel:1122" class="px-4 py-2 rounded-xl bg-rose-600 text-white font-bold text-sm shadow-lg shadow-rose-900/40 hover:bg-rose-700 transition-colors">
-                                <i class="fa-solid fa-phone mr-1"></i> 1122
-                            </a>
-                        </div>
-
-                        <div class="glass-card p-5 rounded-2xl flex items-center justify-between">
-                            <div>
-                                <h4 class="text-white font-bold">AJK Tourism Police</h4>
-                                <p class="text-xs text-slate-400">Tourists Guidence & Help</p>
-                            </div>
-                            <a href="tel:1422" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-900/40 hover:bg-emerald-500 transition-colors">
-                                <i class="fa-solid fa-phone mr-1"></i> 1422
-                            </a>
-                        </div>
-
-                        <div class="glass-card p-5 rounded-2xl flex items-center justify-between">
-                            <div>
-                                <h4 class="text-white font-bold">State Disaster Management (SDMA)</h4>
-                                <p class="text-xs text-slate-400">Landslide & Weather Alerts</p>
-                            </div>
-                            <a href="tel:05822921643" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-900/40 hover:bg-emerald-500 transition-colors">
-                                <i class="fa-solid fa-phone mr-1"></i> 05822-921643
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Feedback Form -->
-                    <div class="glass-card p-8 rounded-3xl border border-slate-700">
-                        <h3 class="text-xl font-bold text-white mb-2">Report Incorrect Number / Feedback</h3>
-                        <p class="text-slate-400 text-xs mb-6">Help us keep hospital landlines and district data accurate for everyone.</p>
-                        
-                        <form onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Your Name</label>
-                                <input type="text" required placeholder="Enter your full name" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none focus:border-emerald-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Email or Phone</label>
-                                <input type="text" required placeholder="Contact info for verification" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none focus:border-emerald-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Message / Corrected Landline</label>
-                                <textarea rows="4" required placeholder="Specify which hospital or district number needs updating..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none focus:border-emerald-500"></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all shadow-lg shadow-emerald-900/40">
-                                Send Feedback
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-    </main>
-
-    <footer class="bg-slate-950 border-t border-alpine-border pt-16 pb-12 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center">
-                        <i class="fa-solid fa-mountain-sun text-white"></i>
-                    </div>
-                    <span class="text-lg font-bold text-white">Kashmir Hub</span>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                    The official comprehensive information portal for Azad Jammu & Kashmir, connecting citizens and tourists with verified district directories, healthcare, and emergency helplines.
-                </p>
-                <div class="flex items-center gap-3">
-                    <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-
-            <div>
-                <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
-                <ul class="space-y-2.5 text-sm">
-                    <li><button onclick="switchView('home')" class="text-slate-400 hover:text-emerald-400 transition-colors">Home</button></li>
-                    <li><button onclick="switchView('districts')" class="text-slate-400 hover:text-emerald-400 transition-colors">10 AJK Districts</button></li>
-                    <li><button onclick="switchView('hospitals')" class="text-slate-400 hover:text-emerald-400 transition-colors">DHQ & THQ Hospitals</button></li>
-                    <li><button onclick="switchView('tourism')" class="text-slate-400 hover:text-emerald-400 transition-colors">Tourism & Valleys</button></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Emergency Contacts</h4>
-                <ul class="space-y-2.5 text-sm">
-                    <li class="text-slate-400"><strong class="text-white">Rescue 1122:</strong> <a href="tel:1122" class="text-emerald-400 hover:underline">1122</a></li>
-                    <li class="text-slate-400"><strong class="text-white">AJK Tourist Police:</strong> <a href="tel:1422" class="text-emerald-400 hover:underline">1422</a></li>
-                    <li class="text-slate-400"><strong class="text-white">SDMA Control:</strong> <a href="tel:05822921643" class="text-emerald-400 hover:underline">05822-921643</a></li>
-                    <li class="text-slate-400"><strong class="text-white">Health Dept:</strong> <a href="tel:05822920015" class="text-emerald-400 hover:underline">05822-920015</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Disclaimer & Notice</h4>
-                <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                    Landline numbers and hospital data are maintained for public facilitation. Numbers are subject to government telecom updates.
-                </p>
-                <div class="px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-400 flex items-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <span>In case of severe emergency, dial 1122 immediately.</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
-            &copy; 2026 Kashmir Hub - Azad Jammu & Kashmir Information Portal. All rights reserved.
-        </div>
-    </footer>
-
-    <!-- Interactive Modal Popup -->
-    <div id="info-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="glass-card max-w-lg w-full p-6 sm:p-8 rounded-3xl relative shadow-2xl border border-slate-700">
-            <button onclick="closeModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div id="modal-content"></div>
-        </div>
-    </div>
-
-    <script>
-        // Hero Carousel Slide Transition
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.hero-slide');
-        function nextSlide() {
-            if(slides.length > 0) {
-                slides[currentSlide].classList.remove('opacity-100');
-                slides[currentSlide].classList.add('opacity-0');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.remove('opacity-0');
-                slides[currentSlide].classList.add('opacity-100');
-            }
-        }
-        setInterval(nextSlide, 5000);
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        function toggleMobileMenu() {
-            mobileMenu.classList.toggle('hidden');
-        }
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-
-        // Single Page View Router
-        function switchView(viewName) {
-            // Hide all views
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            // Show target view
-            const target = document.getElementById('view-' + viewName);
-            if(target) target.classList.add('active');
-
-            // Update nav active styles
-            document.querySelectorAll('.nav-link').forEach(btn => {
-                btn.classList.remove('text-emerald-400', 'font-semibold');
-                btn.classList.add('text-slate-300');
-            });
-            const activeNav = document.getElementById('nav-' + viewName);
-            if(activeNav) {
-                activeNav.classList.remove('text-slate-300');
-                activeNav.classList.add('text-emerald-400', 'font-semibold');
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // 10 Districts Data
-        const districtsData = [
-            { id: 1, name: "Muzaffarabad", capital: "Muzaffarabad", pop: "650,000", languages: "Pahari, Hindko, Urdu", dhq: "Abbas Institute of Medical Sciences (AIMS)", desc: "Capital city of AJK, situated at the confluence of Jhelum and Neelum rivers. Rich in heritage and gateway to Neelum valley." },
-            { id: 2, name: "Neelum District", capital: "Athmuqam", pop: "195,000", languages: "Pahari, Kashmiri, Urdu", dhq: "DHQ Hospital Athmuqam", desc: "Famous for its stunning alpine valleys, waterfalls, Ratti Gali lake, Shounter valley, and dense pine forests." },
-            { id: 3, name: "Hattian Bala", capital: "Hattian Bala", pop: "230,000", languages: "Pahari, Hindko, Urdu", dhq: "DHQ Hospital Hattian Bala", desc: "Known for Leepa valley, Chakothi, historical mountain passes, and scenic river streams." },
-            { id: 4, name: "Mirpur", capital: "Mirpur", pop: "456,000", languages: "Pahari, Punjabi, Urdu", dhq: "DHQ Teaching Hospital Mirpur", desc: "The industrial and financial hub of AJK, famous for Mangla Dam, wide boulevards, and modern infrastructure." },
-            { id: 5, name: "Bhimber", capital: "Bhimber", pop: "420,000", languages: "Punjabi, Pahari, Urdu", dhq: "DHQ Hospital Bhimber", desc: "Gateway to Kashmir from Punjab, rich in Mughal heritage sites like Bhimber Fort and Baghsar Fort." },
-            { id: 6, name: "Kotli", capital: "Kotli", pop: "774,000", languages: "Pahari, Gujri, Urdu", dhq: "DHQ Hospital Kotli", desc: "One of the most populous districts with picturesque hills, waterfalls like Sahansa, and bustling commercial markets." },
-            { id: 7, name: "Poonch (Rawalakot)", capital: "Rawalakot", pop: "500,000", languages: "Pahari, Gujri, Urdu", dhq: "DHQ Hospital Rawalakot", desc: "Known as the 'Pearl Valley', featuring Banjosa Lake, Toli Pir, and pleasant summer weather." },
-            { id: 8, name: "Bagh", capital: "Bagh", pop: "370,000", languages: "Pahari, Gujri, Urdu", dhq: "DHQ Hospital Bagh", desc: "Renowned for Sudhan Gali, Azad Pattan, picturesque mountain viewpoints, and apple orchards." },
-            { id: 9, name: "Sudhnuti (Palandri)", capital: "Palandri", pop: "300,000", languages: "Pahari, Urdu", dhq: "DHQ Hospital Palandri", desc: "Characterized by rugged mountainous terrain, lush green meadows, and historical significance." },
-            { id: 10, name: "Haveli", capital: "Forward Kahuta", pop: "152,000", languages: "Pahari, Gujri, Urdu", dhq: "DHQ Hospital Forward Kahuta", desc: "Border district known for Aliabad, Banjosa connections, and mesmerizing high-altitude pastures." }
-        ];
-
-        // DHQ & THQ Hospitals Data
-        const hospitalsData = [
-            { name: "Abbas Institute of Medical Sciences (AIMS)", district: "Muzaffarabad", level: "DHQ", facilities: "Trauma Center, ICU, 24/7 Emergency, Cardiology" },
-            { name: "CMH Muzaffarabad", district: "Muzaffarabad", level: "DHQ", facilities: "Military & Civilian Emergency, Operation Theater" },
-            { name: "DHQ Teaching Hospital Mirpur", district: "Mirpur", level: "DHQ", facilities: "Burn Unit, ICU, Dialysis, 24/7 Trauma" },
-            { name: "THQ Hospital Islamgarh", district: "Mirpur", level: "THQ", facilities: "Emergency OPD, Lab, Pharmacy" },
-            { name: "DHQ Hospital Rawalakot", district: "Poonch", level: "DHQ", facilities: "Trauma Center, Blood Bank, Pediatric Unit" },
-            { name: "THQ Hospital Hajira", district: "Poonch", level: "THQ", facilities: "Emergency, Basic Surgery, OPD" },
-            { name: "DHQ Hospital Athmuqam", district: "Neelum District", level: "DHQ", facilities: "Mountain Trauma Unit, Emergency Care" },
-            { name: "THQ Hospital Sharda", district: "Neelum District", level: "THQ", facilities: "Emergency Ward, First Aid Station" },
-            { name: "DHQ Hospital Kotli", district: "Kotli", level: "DHQ", facilities: "Emergency, ICU, Maternity Ward" },
-            { name: "THQ Hospital Sehansa", district: "Kotli", level: "THQ", facilities: "24/7 Emergency, Laboratory" },
-            { name: "DHQ Hospital Bagh", district: "Bagh", level: "DHQ", facilities: "Trauma Care, Surgery, Pediatric OPD" },
-            { name: "THQ Hospital Dhirkot", district: "Bagh", level: "THQ", facilities: "Emergency Care, Pharmacy" },
-            { name: "DHQ Hospital Bhimber", district: "Bhimber", level: "DHQ", facilities: "Emergency Care, Blood Bank, Radiology" },
-            { name: "DHQ Hospital Hattian Bala", district: "Hattian Bala", level: "DHQ", facilities: "Trauma Center, Emergency Ward" },
-            { name: "DHQ Hospital Palandri", district: "Sudhnuti", level: "DHQ", facilities: "Emergency Care, General Surgery" },
-            { name: "DHQ Hospital Forward Kahuta", district: "Haveli", level: "DHQ", facilities: "Emergency Ward, Basic Diagnostics" }
-        ];
-
-        // Populate Full Districts Grid in Districts View
-        const fullDistrictsGrid = document.getElementById('full-districts-grid');
-        districtsData.forEach(d => {
-            const card = document.createElement('div');
-            card.className = "glass-card p-6 rounded-2xl hover:border-emerald-500/50 transition-all cursor-pointer group flex flex-col justify-between";
-            card.onclick = () => openDistrictModal(d);
-            card.innerHTML = `
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs border border-emerald-500/20">0${d.id}</span>
-                        <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-1">${d.name}</h3>
-                    <p class="text-xs text-slate-400 mb-3"><i class="fa-solid fa-building-columns text-emerald-400 mr-1"></i> Capital: ${d.capital}</p>
-                    <p class="text-slate-400 text-sm line-clamp-3 mb-4">${d.desc}</p>
-                </div>
-                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                    <span>Pop: ${d.pop}</span>
-                    <span class="text-emerald-400 font-semibold">View Details &rarr;</span>
-                </div>
-            `;
-            fullDistrictsGrid.appendChild(card);
-        });
-
-        // Populate Hospitals Table in Hospitals View
-        const hospitalDirectoryBody = document.getElementById('hospital-directory-body');
-        function renderHospitalsTable(data) {
-            hospitalDirectoryBody.innerHTML = '';
-            if(data.length === 0) {
-                hospitalDirectoryBody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-slate-400">No hospitals found matching your criteria.</td></tr>`;
-                return;
-            }
-            data.forEach(h => {
-                const row = document.createElement('tr');
-                row.className = "hover:bg-slate-800/40 transition-colors";
-                row.innerHTML = `
-                    <td class="py-4 px-6 font-semibold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-hospital text-emerald-400"></i> ${h.name}
-                    </td>
-                    <td class="py-4 px-6 text-slate-300">${h.district}</td>
-                    <td class="py-4 px-6">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${h.level === 'DHQ' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-teal-500/20 text-teal-400 border border-teal-500/30'}">
-                            ${h.level}
-                        </span>
-                    </td>
-                    <td class="py-4 px-6 text-slate-400 text-xs">${h.facilities}</td>
-                    <td class="py-4 px-6">
-                        <a href="tel:${h.phone.replace(/[^0-9+]/g, '')}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-medium text-xs">
-                            <i class="fa-solid fa-phone"></i>
-                            <span>${h.phone}</span>
-                        </a>
-                    </td>
-                `;
-                hospitalDirectoryBody.appendChild(row);
-            });
-        }
-        renderHospitalsTable(hospitalsData);
-
-        // Filter Hospitals in Hospital View
-        function filterHospitalsView() {
-            const query = document.getElementById('hospital-search').value.toLowerCase();
-            const level = document.getElementById('hospital-level-filter').value;
-
-            const filtered = hospitalsData.filter(h => {
-                const matchesQuery = h.name.toLowerCase().includes(query) || h.district.toLowerCase().includes(query) || h.facilities.toLowerCase().includes(query);
-                const matchesLevel = level === 'ALL' || h.level === level;
-                return matchesQuery && matchesLevel;
-            });
-            renderHospitalsTable(filtered);
-        }
-
-        // Global Home Search
-        function handleHomeSearch() {
-            const query = document.getElementById('home-search').value.toLowerCase();
-            if(!query) return;
-
-            const foundDistrict = districtsData.find(d => d.name.toLowerCase().includes(query) || d.capital.toLowerCase().includes(query));
-            if(foundDistrict) {
-                switchView('districts');
-                openDistrictModal(foundDistrict);
-                return;
-            }
-
-            switchView('hospitals');
-            document.getElementById('hospital-search').value = query;
-            filterHospitalsView();
-        }
-
-        // Modal Handlers
-        const modal = document.getElementById('info-modal');
-        const modalContent = document.getElementById('modal-content');
-
-        function openDistrictModal(d) {
-            modalContent.innerHTML = `
-                <div class="flex items-center gap-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-2">
-                    <i class="fa-solid fa-map-location-dot"></i> AJK District Profile
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-2">${d.name}</h3>
-                <p class="text-xs text-slate-400 mb-4">District Headquarters / Capital: <strong class="text-white">${d.capital}</strong></p>
-                <p class="text-slate-300 text-sm leading-relaxed mb-6">${d.desc}</p>
-                <div class="space-y-3 mb-6 bg-slate-900/80 p-4 rounded-xl border border-slate-800 text-sm">
-                    <div class="flex justify-between"><span class="text-slate-400">Estimated Population:</span> <strong class="text-white">${d.pop}</strong></div>
-                    <div class="flex justify-between"><span class="text-slate-400">Primary Languages:</span> <strong class="text-white">${d.languages}</strong></div>
-                    <div class="flex justify-between"><span class="text-slate-400">Main Healthcare:</span> <strong class="text-emerald-400">${d.dhq}</strong></div>
-                    <div class="flex justify-between items-center pt-2 border-t border-slate-800">
-                        <span class="text-slate-400">Headquarter Landline:</span>
-                        <a href="tel:${d.phone.replace(/[^0-9+]/g, '')}" class="text-emerald-400 font-semibold hover:underline flex items-center gap-1">
-                            <i class="fa-solid fa-phone text-xs"></i> ${d.phone}
-                        </a>
-                    </div>
-                </div>
-                <button onclick="closeModal()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all shadow-lg shadow-emerald-900/40">
-                    Close Profile
-                </button>
-            `;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeModal() {
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-
-        modal.addEventListener('click', (e) => {
-            if(e.target === modal) closeModal();
-        });
-
-        function handleFeedbackSubmit(e) {
-            e.preventDefault();
-            alert('Thank you! Your feedback/number correction has been submitted to the AJK administrative facilitation team.');
-            e.target.reset();
-        }
-    </script>
-</body>
-</html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kashmir Hub - AJK Official Information & Emergency Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--pine:#0f3d33;--moss:#1f6b57;--paper:#f5f7f4;--ink:#16231f;--muted:#5a6b65;--line:#dbe3de;--alert:#b3261e;--gold:#b7791f;--card:#fff}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.55 'Source Sans 3',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+h1,h2,h3{font-family:'Source Serif 4',serif;line-height:1.2}
+a{color:inherit}button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.bar{background:var(--alert);color:#fff;font-size:14px;overflow:hidden;white-space:nowrap}
+.bar .wrap{display:flex;align-items:center;gap:16px}
+.bar b{flex:none;padding:7px 0}
+.tick{overflow:hidden;flex:1}
+.tick div{display:inline-flex;gap:40px;animation:t 40s linear infinite;padding:7px 0}
+.tick:hover div{animation-play-state:paused}
+.tick a{font-weight:700;text-decoration:none}
+@keyframes t{to{transform:translateX(-50%)}}
+header{background:var(--pine);color:#fff;position:sticky;top:0;z-index:30}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo{width:40px;height:40px;border-radius:8px;background:var(--gold);display:grid;place-items:center;font-size:18px}
+.brand strong{font:700 20px 'Source Serif 4',serif;display:block;line-height:1.1}
+.brand small{font-size:12px;opacity:.75}
+nav{display:flex;gap:4px}
+nav button{background:none;border:0;color:#cfe3da;padding:8px 12px;border-radius:6px;font-weight:600;font-size:15px}
+nav button:hover{background:rgba(255,255,255,.1)}
+nav button.on{color:#fff;box-shadow:inset 0 -3px var(--gold);border-radius:6px 6px 0 0}
+.sos{background:var(--alert);color:#fff;text-decoration:none;padding:9px 16px;border-radius:6px;font-weight:700;white-space:nowrap}
+#burger{display:none;background:none;border:1px solid #ffffff55;color:#fff;width:40px;height:40px;border-radius:6px}
+.view{display:none}.view.on{display:block}
+.hero{position:relative;min-height:540px;display:flex;align-items:center;color:#fff;overflow:hidden}
+.slide{position:absolute;inset:0;background:center/cover;opacity:0;transition:opacity 1s}
+.slide.on{opacity:1}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,40,33,.92),rgba(10,40,33,.45))}
+.hero .wrap{position:relative;z-index:2;padding-top:56px;padding-bottom:56px}
+.hero h1{font-size:clamp(34px,5.5vw,60px);max-width:14em;margin-bottom:16px}
+.hero p{max-width:34em;font-size:18px;opacity:.92;margin-bottom:28px}
+.search{display:flex;gap:8px;max-width:620px;background:#fff;padding:8px;border-radius:10px}
+.search input{flex:1;border:0;padding:10px 12px;font:inherit;min-width:0;outline:0}
+.btn{background:var(--moss);color:#fff;border:0;border-radius:6px;padding:10px 20px;font-weight:600;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--pine)}
+#msg{margin-top:10px;font-size:14px;min-height:20px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pills button{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:99px;padding:7px 16px;font-size:14px}
+.pills button:hover{background:#fff;color:var(--pine)}
+section.s{padding:56px 0}
+.head{margin-bottom:28px;max-width:46em}
+.head h2{font-size:clamp(28px,4vw,40px);margin-bottom:8px}
+.head p{color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.link{background:none;border:0;color:var(--moss);font-weight:700;padding:0}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;height:210px;object-fit:cover;display:block;background:#dfe7e2}
+.imgw{position:relative}
+.tag{position:absolute;left:10px;top:10px;background:var(--pine);color:#fff;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px}
+.cb{padding:18px;display:flex;flex-direction:column;flex:1;gap:8px}
+.cb h3{font-size:20px}
+.cb p{color:var(--muted);font-size:15px;flex:1}
+.cf{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:10px;font-size:13px;color:var(--muted)}
+.cf b{color:var(--moss)}
+.dc{text-align:left;font:inherit;cursor:pointer;transition:border-color .2s}
+.dc:hover{border-color:var(--moss)}
+.dc .cb{padding:20px}
+.num{width:30px;height:30px;border-radius:6px;background:#e3efe9;color:var(--moss);display:grid;place-items:center;font-weight:700;font-size:13px}
+.roads{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-bottom:36px}
+.road{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--moss);border-radius:8px;padding:16px}
+.road.warn{border-left-color:var(--gold)}
+.road span{font-size:12px;font-weight:700;color:var(--moss)}.road.warn span{color:var(--gold)}
+.road h3{font-size:18px;margin:4px 0}
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
+.tools input,.tools select,form input,form textarea{font:inherit;border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:#fff;color:var(--ink)}
+.tools input{flex:1;min-width:220px}
+.chips{display:flex;gap:6px}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font-weight:600;font-size:14px}
+.chips .on{background:var(--pine);color:#fff;border-color:var(--pine)}
+#count{font-size:14px;color:var(--muted);margin-bottom:10px}
+.tw{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{background:#e9f0ec;text-align:left;font-size:13px;padding:12px 16px;color:var(--pine)}
+td{padding:14px 16px;border-top:1px solid var(--line);font-size:15px;vertical-align:top}
+.lv{font-size:12px;font-weight:700;padding:2px 10px;border-radius:99px;background:#e3efe9;color:var(--moss)}
+.lv.THQ{background:#fbf0d9;color:#8a5a12}
+.call{display:inline-flex;gap:6px;align-items:center;background:var(--moss);color:#fff;padding:6px 12px;border-radius:6px;font-weight:600;text-decoration:none;font-size:14px}
+.nop{color:var(--muted);font-size:13px}
+.nop a{color:var(--alert);font-weight:700}
+.note{margin-top:14px;font-size:14px;color:var(--muted)}
+.two{display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.ec{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:12px}
+.ec small{color:var(--muted)}
+.ec a{background:var(--moss);color:#fff;text-decoration:none;font-weight:700;padding:8px 14px;border-radius:6px;white-space:nowrap}
+.ec a.r{background:var(--alert)}
+form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;gap:14px}
+form label{font-weight:600;font-size:14px;display:grid;gap:6px}
+#ok{color:var(--moss);font-weight:600}
+footer{background:var(--pine);color:#cfe3da;margin-top:auto;padding:44px 0 20px;font-size:14px}
+.fg{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:28px}
+footer h4{color:#fff;margin-bottom:10px;font-size:15px}
+footer li{list-style:none;margin-bottom:6px}footer ul{padding:0}
+footer button{background:none;border:0;color:#cfe3da;padding:0}
+footer button:hover,footer a:hover{color:#fff}
+.alertbox{background:rgba(179,38,30,.25);border-radius:6px;padding:8px 12px;margin-top:10px}
+.copy{border-top:1px solid #ffffff22;padding-top:16px;text-align:center;font-size:13px}
+.quiz{padding:16px 0 80px}
+.qcard{position:relative;overflow:hidden;color:#fff;border-radius:24px;padding:48px clamp(20px,5vw,56px);background:linear-gradient(120deg,#0f3d33,#1f6b57,#0b5a63,#0f3d33);background-size:300% 300%;animation:gs 14s ease infinite;box-shadow:0 28px 60px -28px rgba(15,61,51,.65);display:grid;gap:36px;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center}
+.qcard>*{position:relative;z-index:1}
+.qcard:before,.qcard:after{content:"";position:absolute;border-radius:50%;filter:blur(44px);opacity:.45;animation:fl 9s ease-in-out infinite}
+.qcard:before{width:260px;height:260px;background:#e8a93c;top:-90px;right:-60px}
+.qcard:after{width:300px;height:300px;background:#2fa58a;bottom:-130px;left:30%;animation-delay:-4s}
+.compass{width:86px;height:86px;border-radius:50%;border:2px dashed #ffffff90;display:grid;place-items:center;font-size:36px;color:#f2c46d;margin-bottom:20px;animation:sp 24s linear infinite}
+.qintro h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:10px}
+.qintro .sub{opacity:.88;font-size:17px}
+.qpanel{background:rgba(255,255,255,.1);border:1px solid #ffffff40;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:18px;padding:24px;min-height:300px}
+.qcard .opts button{display:flex;align-items:center;gap:12px;transition:transform .2s,background .2s,color .2s}
+.qcard .opts button:hover{transform:translateY(-3px)}
+.qcard .opts i{width:22px;text-align:center;color:#f2c46d}
+.qcard .opts button:hover i{color:var(--moss)}
+#qa .qq,#qa .opts{animation:pop .45s both}
+.res .card{animation:pop .5s both}.res .card:nth-child(2){animation-delay:.12s}.res .card:nth-child(3){animation-delay:.24s}
+@keyframes gs{50%{background-position:100% 50%}}
+@keyframes fl{50%{transform:translate(32px,26px) scale(1.15)}}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes pop{from{opacity:0;transform:translateY(16px)}}
+@media(max-width:820px){.qcard{grid-template-columns:1fr;padding:32px 20px}}
+@media(prefers-reduced-motion:reduce){.qcard,.qcard:before,.qcard:after,.compass,#qa .qq,#qa .opts,.res .card{animation:none}}
+.prog{height:6px;background:#ffffff30;border-radius:9px;margin-bottom:18px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--gold);transition:width .3s}
+.qq{font:600 22px 'Source Serif 4',serif;margin-bottom:14px}
+.opts{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.opts button{text-align:left;background:#ffffff14;border:1px solid #ffffff55;color:#fff;border-radius:8px;padding:14px 16px;font-weight:600}
+.opts button:hover{background:#fff;color:var(--pine)}
+.qb{background:none;border:0;color:#cfe3da;margin-top:16px;padding:0;font-weight:600;margin-right:18px}
+.res{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:6px}
+.res .card{color:var(--ink)}.res .card img{height:150px}
+.res .why{font-size:13px;color:var(--moss);font-weight:600}
+.btn{position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn:hover:after{left:140%}.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(15,61,51,.8)}.btn:active{transform:scale(.97)}
+.btn i.fa-arrow-right{transition:transform .25s}.btn:hover i.fa-arrow-right{transform:translateX(5px)}
+.card{transition:transform .3s,box-shadow .3s,border-color .2s}.card:hover{transform:translateY(-5px);box-shadow:0 20px 40px -22px rgba(15,61,51,.55)}
+.card img{transition:transform .7s}.card:hover img{transform:scale(1.07)}
+.sos{animation:ring 2.4s infinite}@keyframes ring{0%{box-shadow:0 0 0 0 rgba(179,38,30,.6)}70%,100%{box-shadow:0 0 0 12px rgba(179,38,30,0)}}
+header{transition:box-shadow .3s}header.sc{box-shadow:0 10px 28px -14px rgba(0,0,0,.6)}
+.stats{display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:36px;padding-top:20px;border-top:1px solid #ffffff40}
+.stats b{font:700 32px 'Source Serif 4',serif;display:block;line-height:1}.stats span{font-size:13px;opacity:.85}
+#modal.on .mb{animation:pop .35s both}
+.mb.wide{max-width:780px;padding:0;max-height:92vh;overflow:auto}
+.mb.wide .x{background:#fff;border-radius:50%;width:36px;height:36px;z-index:2;font-size:22px;line-height:1}
+.gimg{position:relative}.gimg img{width:100%;height:260px;object-fit:cover;display:block;border-radius:12px 12px 0 0}
+.gb{padding:24px 28px 28px}.gb h3{font-size:30px;margin-bottom:8px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:18px 0}
+.facts div{background:var(--paper);border-radius:8px;padding:10px 14px}.facts small{display:block;color:var(--muted);font-size:12px}
+.gh{font:700 18px 'Source Serif 4',serif;margin:22px 0 10px;color:var(--pine)}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:8px;font-size:14px}.hrow small{color:var(--muted)}
+.gact{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.sosb{background:var(--alert)}.sosb:hover{background:#8f1d17}
+.btn.alt{background:#fff;color:var(--pine);border:1px solid var(--line)}.btn.alt:hover{background:var(--paper)}
+@media(prefers-reduced-motion:reduce){.sos,#modal.on .mb{animation:none}.card,.card img,.btn{transition:none}}
+#bot{position:fixed;right:20px;bottom:20px;z-index:45}
+#bl{width:60px;height:60px;border-radius:50%;border:0;background:linear-gradient(135deg,#b7791f,#e8a93c);color:#fff;font-size:24px;box-shadow:0 12px 28px -8px rgba(0,0,0,.5);touch-action:none;cursor:grab;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+#bot.open #bl{display:none}#bot:not(.open) #bp{display:none}
+#bp{width:min(370px,calc(100vw - 16px));height:min(500px,calc(100vh - 16px));background:#fff;border-radius:16px;box-shadow:0 24px 60px -16px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);animation:pop .3s both}
+.chd{display:flex;align-items:center;gap:10px;background:var(--pine);color:#fff;padding:12px 14px;cursor:grab;touch-action:none;user-select:none}
+.chd small{display:block;opacity:.7;font-size:12px}
+.av{width:36px;height:36px;border-radius:50%;background:#b7791f;display:grid;place-items:center}
+#bx{margin-left:auto;background:none;border:0;color:#fff;font-size:26px;line-height:1}
+#bm{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+.m{max-width:90%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.45;animation:pop .25s both}
+.m.b{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
+.m.u{background:var(--moss);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.m a{color:var(--moss);font-weight:700}
+.bh{border-top:1px solid var(--line);padding:8px 0 2px;margin-top:8px}
+.bsos{display:inline-block;margin-top:8px;background:var(--alert);color:#fff!important;padding:6px 12px;border-radius:6px;text-decoration:none}
+.mini{padding:6px 12px;font-size:13px;margin:8px 6px 0 0}
+.dots i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--muted);margin-right:3px;animation:bob .9s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+#bc{display:flex;gap:6px;overflow-x:auto;padding:8px 12px;background:var(--paper);border-top:1px solid var(--line)}
+#bc button{flex:none;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--moss)}
+#bf{display:flex;gap:8px;padding:10px;border:0;border-top:1px solid var(--line);border-radius:0;background:#fff}
+#bf input{flex:1;min-width:0}
+@media(prefers-reduced-motion:reduce){#bl,#bp,.m{animation:none}}
+.tl{list-style:none;padding:0;margin:0 0 0 8px;border-left:3px solid var(--moss)}
+.tl li{position:relative;padding:0 0 16px 22px;font-size:15px}
+.tl li:before{content:"";position:absolute;left:-10px;top:5px;width:15px;height:15px;border-radius:50%;background:var(--gold);border:3px solid var(--paper)}
+.tl b{font:700 16px 'Source Serif 4',serif;color:var(--pine);display:block}
+.pdfc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px;position:sticky;top:92px;align-self:start}
+.pdfc>i{font-size:54px;color:var(--alert)}.pdfc h3{font-size:24px;margin:12px 0 8px}.pdfc p{color:var(--muted);margin-bottom:14px}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.jump button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 16px;font-weight:600;color:var(--moss);transition:all .2s}
+.jump button:hover{background:var(--pine);color:#fff;transform:translateY(-2px)}
+.blk{margin-top:64px;scroll-margin-top:90px}.blk h3{font-size:28px;margin-bottom:6px}.blk>p{color:var(--muted);margin-bottom:16px}
+#dest{scroll-margin-top:90px}
+.tools .btn.alt.on{background:var(--alert);color:#fff;border-color:var(--alert)}
+.hrt{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;border:0;background:#fff;color:var(--alert);font-size:16px;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s}.hrt:hover{transform:scale(1.15)}
+.pd{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:12px;animation:pop .45s both}
+.pd img{width:96px;height:80px;object-fit:cover;border-radius:8px}
+.dn{font-weight:700;color:var(--gold);font-size:13px}.pd b{display:block;font:700 18px 'Source Serif 4',serif}.pd small{color:var(--muted)}
+.plist{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.plist label{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;transition:background .2s}
+.plist input:checked+span{text-decoration:line-through;color:var(--muted)}
+.plist label:has(input:checked){background:#e3efe9}
+.pbar{height:10px;background:#e3efe9;border-radius:9px;overflow:hidden;margin:6px 0}.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--moss),var(--gold));transition:width .4s}
+.alg{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-bottom:18px}
+.alc{display:grid;gap:4px;background:var(--pine);color:#fff;text-decoration:none;border-radius:12px;padding:18px;transition:transform .2s}.alc:hover{transform:translateY(-3px)}.alc i{font-size:26px;color:#f2c46d}.alc span{font-size:13px;opacity:.85}.alc.r{background:var(--alert)}
+.safe{padding-left:20px;display:grid;gap:8px}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:28px;text-align:center}.empty i{font-size:30px;color:var(--moss)}.empty p{color:var(--muted);margin:8px 0 14px}.empty .btn i{font-size:inherit;color:inherit}
+.mapw iframe{width:100%;height:220px;border:0;border-radius:10px;background:#e3efe9;margin:6px 0 10px}
+.mp{font-size:13px;font-weight:700;color:var(--moss);text-decoration:none;white-space:nowrap}
+#pa{display:none}
+@media print{body.pr>*{display:none!important}body.pr>#pa{display:block!important;padding:16px}#pa .gact,#pa iframe,#pa .mapw,#pa .x,#pa button,#pa .mini,#pa .hrt{display:none!important}#pa img{max-width:100%}}
+.lg{background:none;border:1px solid #ffffff66;color:#fff;border-radius:6px;padding:8px 12px;font-weight:700;font-family:'Noto Naskh Arabic','Source Sans 3',sans-serif}.lg:hover{background:#ffffff22}
+html[lang=ur] body,html[lang=ur] :is(h1,h2,h3,h4
