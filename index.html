@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kashmir Hub - AJK Official Information & Emergency Portal</title>
+
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Emergency helplines ticker -->
+  <div class="bar">
+    <div class="wrap">
+      <b><i class="fa-solid fa-triangle-exclamation"></i> Emergency helplines</b>
+      <div class="tick"><div id="tick"></div></div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap">
+      <a href="#home" class="brand">
+        <span class="logo"><i class="fa-solid fa-mountain-sun"></i></span>
+        <span><strong>Kashmir Hub</strong><small>AJK Official Tourism, Health & Emergency Directory</small></span>
+      </a>
+      <nav id="nav" aria-label="Main">
+        <button data-v="home">Home</button>
+        <button data-v="districts">Districts Hub</button>
+        <button data-v="hospitals">Hospitals & Emergency</button>
+        <button data-v="tourism">Tourism & Valleys</button>
+        <button data-v="firstaid">First Aid</button>
+        <button data-v="contact">Contact & Support</button>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button id="lang" class="lg" aria-label="Language">اردو</button>
+        <a class="sos" href="tel:1122"><i class="fa-solid fa-phone-volume"></i> <span>Rescue </span>1122</a>
+        <button id="burger" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= HOME ================= -->
+    <div id="view-home" class="view">
+      <div class="hero">
+        <div id="slides"></div>
+        <div class="wrap">
+          <h1>Discover the Paradise of Kashmir</h1>
+          <p>Your digital companion for all 10 districts, DHQ/THQ hospital directories, emergency helplines, and mountain destinations of Azad Jammu & Kashmir.</p>
+          <form class="search" id="hs" style="padding:8px;border:0;display:flex;gap:8px;background:#fff">
+            <input id="q" type="search" placeholder="Search hospitals, districts, or valleys..." aria-label="Search">
+            <button class="btn">Search portal</button>
+          </form>
+          <div id="msg" role="status"></div>
+          <div class="pills">
+            <button data-v="districts">10 Districts Hub</button>
+            <button data-v="hospitals">DHQ/THQ Hospitals</button>
+            <button data-v="tourism">Top Valleys</button>
+            <button data-v="firstaid">First Aid Guide</button>
+            <button data-v="contact">Emergency Contacts</button>
+          </div>
+          <div class="stats" id="stats"></div>
+        </div>
+      </div>
+
+      <section class="s gal">
+        <div class="wrap">
+          <div class="row head"><div><h2>Gallery</h2><p>A glimpse of Azad Kashmir. Tap a photo to see it full screen.</p></div><div class="garr"><button id="gprev" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button><button id="gnext" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button></div></div>
+          <div class="gg" id="gallery"></div>
+        </div>
+      </section>
+
+      <section class="s">
+        <div class="wrap">
+          <div class="row head">
+            <div>
+              <h2>Featured Tourist Destinations</h2>
+              <p>Alpine lakes, ridges and valleys worth the journey.</p>
+            </div>
+            <button class="link" data-v="tourism">View all destinations <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <div class="grid" id="featured"></div>
+        </div>
+      </section>
+
+      <section style="padding:8px 0 16px">
+        <div class="wrap">
+          <div class="svc pl">
+            <div class="svci"><i class="fa-solid fa-route"></i></div>
+            <div class="svct">
+              <h3>Plan your trip in minutes</h3>
+              <p>Pick 2, 3 or 5 days and get a ready route with the full guide of every place. Save it as a PDF.</p>
+            </div>
+            <div class="pbtns"><button class="btn" data-plan="2">2 days</button><button class="btn" data-plan="3">3 days</button><button class="btn" data-plan="5">5 days</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding:8px 0 24px">
+        <div class="wrap">
+          <div class="svc">
+            <div class="svci"><i class="fa-solid fa-store"></i></div>
+            <div class="svct">
+              <h3>Run a hotel, guide or jeep service?</h3>
+              <p>Get listed on Kashmir Hub and reach visitors planning their trip. Send your details on WhatsApp and we will verify and list your service.</p>
+            </div>
+            <a class="btn" target="_blank" rel="noopener" href="https://wa.me/923492432301?text=Assalam%20o%20Alaikum%2C%20I%20would%20like%20to%20list%20my%20service%20(hotel%20%2F%20guide%20%2F%20jeep)%20on%20Kashmir%20Hub.%0AName%3A%0AService%20type%3A%0ADistrict%3A%0APhone%3A"><i class="fa-brands fa-whatsapp"></i> List your service</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz" aria-labelledby="qt">
+        <div class="wrap">
+          <div class="qcard">
+            <div class="qintro">
+              <div class="compass"><i class="fa-solid fa-compass"></i></div>
+              <h2 id="qt">Find your perfect destination</h2>
+              <p class="sub">Answer 3 quick questions and get places in Azad Kashmir picked for your style.</p>
+            </div>
+            <div class="qpanel">
+              <div class="prog"><i id="qp" style="width:0"></i></div>
+              <div id="qa" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= DISTRICTS ================= -->
+    <div id="view-districts" class="view">
+      <section class="s">
+        <div class="wrap">
+          <div class="head">
+            <h2>All 10 Districts of Azad Kashmir</h2>
+            <p>Complete profiles for every district, including capitals, population, headquarters healthcare and administration details.</p>
+          </div>
+          <div class="grid" id="dgrid"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= HOSPITALS ================= -->
+    <div id="view-hospitals" class="view">
+      <section class="s">
+        <div class="wrap">
+          <div class="head">
+            <h2>DHQ & THQ Hospitals Directory</h2>
+            <p>Search District Headquarters (DHQ) and Tehsil Headquarters (THQ) hospitals across AJK. In a life-threatening emergency, call Rescue 1122 first.</p>
+          </div>
+          <div class="tools">
+            <input id="hq" type="search" placeholder="Filter by hospital, district or facility..." aria-label="Filter hospitals">
+            <select id="hd" aria-label="District"><option value="">All districts</option></select>
+            <div class="chips" id="hl">
+              <button data-l="" class="on">All</button>
+              <button data-l="DHQ">DHQ</button>
+              <button data-l="THQ">THQ</button>
+            </div>
+          </div>
+          <div id="count" aria-live="polite"></div>
+          <div class="tw">
+            <table>
+              <thead>
+                <tr><th>Hospital</th><th>District</th><th>Level</th><th>Facilities & Trauma</th><th>Contact</th></tr>
+              </thead>
+              <tbody id="hb"></tbody>
+            </table>
+          </div>
+          <p class="note">Facilities can change, so please confirm with the hospital. Landline numbers are shown only once verified. Know a correct number? <button class="link" data-v="contact">Send a correction</button></p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= TOURISM ================= -->
+    <div id="view-tourism" class="view">
+      <section class="s">
+        <div class="wrap">
+          <div class="head">
+            <h2>Tourism & Valleys Guide</h2>
+            <p>Guides to alpine lakes, meadows, mountain passes and heritage sites across Azad Jammu & Kashmir.</p>
+          </div>
+          <p class="note" style="margin-bottom:28px"><i class="fa-solid fa-circle-info"></i> This guide does not show live road or weather status because it changes quickly. Before you travel, check <a href="https://sdma.pk" target="_blank" rel="noopener" style="color:var(--moss);font-weight:700">sdma.pk</a> or ask Tourist Police on 1422.</p>
+
+          <div class="jump">
+            <button data-j="dest">Destinations</button>
+            <button data-j="plan">Trip planner</button>
+            <button data-j="pack">Packing list</button>
+            <button data-j="alerts">Alerts &amp; safety</button>
+            <button data-j="dir">Hotels &amp; guides</button>
+          </div>
+
+          <div class="tools" id="dest">
+            <input id="tq" type="search" placeholder="Search destinations..." aria-label="Search destinations">
+            <select id="td" aria-label="District"><option value="">All districts</option></select>
+            <select id="ts" aria-label="Season">
+              <option value="">Any season</option>
+              <option value="su">Summer</option>
+              <option value="sp">Spring / autumn</option>
+              <option value="wi">Winter</option>
+            </select>
+            <select id="te" aria-label="Difficulty">
+              <option value="">Any difficulty</option>
+              <option value="easy">Easy access</option>
+              <option value="adv">Adventure route</option>
+            </select>
+            <button class="btn" id="surp"><i class="fa-solid fa-dice"></i> Surprise me</button>
+            <button class="btn alt" id="favt"><i class="fa-solid fa-heart"></i> Saved <span id="fc">0</span></button>
+          </div>
+          <div id="tcount" style="font-size:14px;color:var(--muted);margin-bottom:12px"></div>
+          <div class="grid" id="tgrid"></div>
+
+          <div class="blk" id="plan">
+            <h3>Trip planner</h3>
+            <p>Pick how many days you have and get a ready route. Order can change with road and weather, so confirm with a local guide.</p>
+            <div class="chips" id="pdays" style="margin-bottom:14px">
+              <button data-p="2" class="on">2 days</button>
+              <button data-p="3">3 days</button>
+              <button data-p="5">5 days</button>
+            </div>
+            <div id="pout"></div>
+          </div>
+
+          <div class="blk" id="pack">
+            <h3>Packing list</h3>
+            <p>Tick items as you pack. Your progress is saved on this device.</p>
+            <div class="pbar"><i id="pk"></i></div>
+            <p id="pkm" style="font-weight:600;color:var(--moss)"></p>
+            <div class="plist" id="plist"></div>
+          </div>
+
+          <div class="blk" id="alerts">
+            <h3>Weather alerts &amp; safety</h3>
+            <p>Check official alerts before every trip, especially in the rainy season.</p>
+            <div class="alg">
+              <a class="alc" href="https://sdma.pk" target="_blank" rel="noopener"><i class="fa-solid fa-cloud-bolt"></i><b>SDMA Azad Kashmir</b><span>Official alerts and disaster information at sdma.pk</span></a>
+              <a class="alc" href="tel:05822921643"><i class="fa-solid fa-phone"></i><b>SDMA control room</b><span>05822-921643</span></a>
+              <a class="alc r" href="tel:1122"><i class="fa-solid fa-phone-volume"></i><b>Rescue 1122</b><span>Ambulance and rescue</span></a>
+            </div>
+            <ul class="safe">
+              <li><b>Altitude:</b> lakes such as Ratti Gali are above 3,000 m. Climb gradually, drink water, and descend if headache or nausea gets worse.</li>
+              <li><b>Weather:</b> mountain weather changes fast. Avoid river crossings after rain.</li>
+              <li><b>Roads:</b> landslides can block valley roads in the monsoon. Start early and carry extra food and water.</li>
+              <li><b>Signal:</b> mobile coverage can be weak. Tell someone your route and save 1122.</li>
+              <li><b>Respect locals:</b> dress modestly, take your litter back, and ask before photographing people.</li>
+            </ul>
+          </div>
+
+          <div class="blk" id="dir">
+            <h3>Hotels, guides &amp; jeeps</h3>
+            <p>Only verified listings appear here.</p>
+            <div class="chips" id="dtabs" style="margin-bottom:14px">
+              <button data-t="Hotels" class="on">Hotels</button>
+              <button data-t="Guides">Guides</button>
+              <button data-t="Jeeps">Jeeps</button>
+            </div>
+            <div id="dout"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="view-firstaid" class="view">
+      <section class="s">
+        <div class="wrap">
+          <div class="head"><h2>First Aid Guide</h2><p>Simple steps for common problems in the mountains. Tap a topic to open it.</p></div>
+          <div class="fab"><div><b>Life-threatening emergency?</b><span>Call Rescue 1122 first, then follow the steps below.</span></div><a class="btn" href="tel:1122"><i class="fa-solid fa-phone-volume"></i> Call 1122</a></div>
+          <div class="fag"><details class="fa"><summary><i class="fa-solid fa-phone-volume"></i> Calling 1122: what to say</summary><ol><li>Say your exact location or the nearest landmark.</li><li>Say what happened and how many people are hurt.</li><li>Describe their condition: awake, breathing, bleeding.</li><li>Stay on the line and follow the operator's instructions.</li><li>Send someone to meet the ambulance if you can.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-mountain"></i> Altitude sickness</summary><ol><li>Signs: headache, nausea, dizziness, unusual tiredness, poor sleep.</li><li>Stop climbing and rest. Drink water and eat light food.</li><li>If symptoms do not ease, or get worse, go down to a lower height.</li><li>Confusion, breathlessness at rest, or trouble walking in a straight line are danger signs: go down at once and call 1122.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-snowflake"></i> Cold and hypothermia</summary><ol><li>Shivering, slurred speech and clumsiness are early signs.</li><li>Move the person out of wind and rain. Take off wet clothes.</li><li>Wrap in dry layers or a blanket, including head and neck.</li><li>Give warm sweet drinks only if they are awake and can swallow.</li><li>Do not rub their arms and legs and do not give alcohol. Call 1122 if they stop shivering or become drowsy.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-droplet"></i> Bleeding and wounds</summary><ol><li>Press firmly on the wound with a clean cloth.</li><li>If blood soaks through, add more cloth on top. Do not remove the first one.</li><li>Raise the injured limb if you do not suspect a broken bone.</li><li>Rinse small cuts with clean water and cover with a clean dressing.</li><li>Heavy bleeding that will not stop: call 1122.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-bone"></i> Sprains and broken bones</summary><ol><li>Keep the person still and do not try to straighten the limb.</li><li>Support the injured part in the position you found it, using clothing or a padded splint.</li><li>Do not give food or drink in case surgery is needed.</li><li>Get medical help. For neck, back or head injuries, do not move the person and call 1122.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-fire"></i> Burns</summary><ol><li>Cool the burn under cool running water for about 20 minutes.</li><li>Take off rings and tight items near the burn before it swells.</li><li>Cover loosely with a clean non-fluffy cloth or cling film.</li><li>Do not use ice, butter or toothpaste, and do not burst blisters.</li><li>Large, deep or face burns: call 1122.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-heart-pulse"></i> Not breathing: CPR (adult)</summary><ol><li>Check if they respond and are breathing normally. Shout for help and call 1122.</li><li>Place the heel of your hand on the centre of the chest.</li><li>Push hard and fast, about 5 to 6 cm deep, 100 to 120 times a minute.</li><li>Keep going without stopping until help arrives or the person recovers.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-lungs"></i> Choking (adult)</summary><ol><li>If they can cough, encourage them to keep coughing.</li><li>If they cannot cough or speak, give up to 5 firm back blows between the shoulder blades.</li><li>Then give up to 5 abdominal thrusts: fist above the navel, pull sharply inwards and upwards.</li><li>Repeat. If they pass out, call 1122 and start CPR.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-sun"></i> Heat and sun</summary><ol><li>Move to shade and loosen tight clothing.</li><li>Cool the skin with a wet cloth and fan.</li><li>Sip water slowly. Call 1122 if they are confused, faint, or very hot with dry skin.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-bug"></i> Snake and insect bites</summary><ol><li>Keep the person calm and still. Movement spreads venom faster.</li><li>Rest the bitten limb comfortably and remove rings and watches.</li><li>Do not cut, suck, tie tightly or apply ice.</li><li>Go to the nearest hospital or call 1122. Note the snake's colour and shape only if it is safe.</li></ol></details><details class="fa"><summary><i class="fa-solid fa-briefcase-medical"></i> Simple first-aid kit</summary><ol><li>Bandages, sterile gauze and medical tape.</li><li>Antiseptic wipes and clean gloves.</li><li>Oral rehydration salts (ORS) sachets.</li><li>Thermal blanket, torch and whistle.</li><li>Any personal medicines. Follow label instructions for pain relief.</li></ol></details></div>
+          <p class="note">This is general first-aid guidance for emergencies and does not replace professional care. Always get medical help, and consider taking a certified first-aid course before you trek.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= CONTACT ================= -->
+    <div id="view-contact" class="view">
+      <section class="s">
+        <div class="wrap">
+          <div class="head">
+            <h2>Contact & Emergency Support</h2>
+            <p>Reach government departments and disaster authorities, or report an incorrect number.</p>
+          </div>
+          <div class="two">
+            <div>
+              <h3 style="margin-bottom:14px">Primary emergency contacts</h3>
+              <div id="ecs"></div>
+            </div>
+            <form id="ff">
+              <h3>Report incorrect number / feedback</h3>
+              <p style="color:var(--muted);font-size:14px">Help us keep hospital landlines and district data accurate.</p>
+              <label>Your name<input required placeholder="Full name" autocomplete="name"></label>
+              <label>Email or phone<input required placeholder="So we can verify the update" autocomplete="email"></label>
+              <label>Message / corrected landline<textarea rows="4" required placeholder="Which hospital or district number needs updating?"></textarea></label>
+              <button class="btn">Send feedback</button>
+              <div id="ok" role="status"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="fg">
+        <div>
+          <h4>Kashmir Hub</h4>
+          <p>Information portal for Azad Jammu & Kashmir, connecting citizens and tourists with district directories, healthcare and emergency helplines.</p>
+        </div>
+        <div>
+          <h4>Quick links</h4>
+          <ul>
+            <li><button data-v="home">Home</button></li>
+            <li><button data-v="districts">10 AJK Districts</button></li>
+            <li><button data-v="hospitals">DHQ & THQ Hospitals</button></li>
+            <li><button data-v="tourism">Tourism & Valleys</button></li>
+            <li><button data-v="firstaid">First Aid Guide</button></li>
+            <li><a href="https://wa.me/923492432301?text=Assalam%20o%20Alaikum%2C%20I%20would%20like%20to%20list%20my%20service%20(hotel%20%2F%20guide%20%2F%20jeep)%20on%20Kashmir%20Hub.%0AName%3A%0AService%20type%3A%0ADistrict%3A%0APhone%3A" target="_blank" rel="noopener" style="color:#cfe3da">List your service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Emergency contacts</h4>
+          <ul id="fe"></ul>
+        </div>
+        <div>
+          <h4>Disclaimer</h4>
+          <p>This portal gives general guidance only and does not show live information such as road status or weather. Hospital and landline data may change. Please confirm with the relevant authority before you travel.</p>
+          <div class="alertbox"><i class="fa-solid fa-triangle-exclamation"></i> In a severe emergency, dial 1122 immediately.</div>
+        </div>
+      </div>
+      <div class="copy">&copy; 2026 Kashmir Hub - Azad Jammu & Kashmir Information Portal. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Chat assistant -->
+  <div id="bot">
+    <button id="bl" aria-label="Open Kashmir Hub assistant" title="Ask the assistant (drag to move)"><i class="fa-solid fa-comment-dots"></i></button>
+    <div id="bp" role="dialog" aria-label="Kashmir Hub assistant">
+      <div class="chd">
+        <span class="av"><i class="fa-solid fa-robot"></i></span>
+        <div><strong>Kashmir Assistant</strong><small>Drag me anywhere on the screen</small></div>
+        <button id="bx" aria-label="Close assistant">&times;</button>
+      </div>
+      <div id="bm" aria-live="polite"></div>
+      <div id="bc"></div>
+      <form id="bf">
+        <input id="bi" placeholder="Ask about hospitals, places, helplines..." aria-label="Your question" autocomplete="off">
+        <button class="btn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer"><button id="lbx" aria-label="Close">&times;</button><button id="lbp" aria-label="Previous photo"><i class="fa-solid fa-chevron-left"></i></button><figure><img id="lbi" alt=""><figcaption id="lbc"></figcaption><button class="btn" id="lbg" data-g=""><i class="fa-solid fa-compass"></i> Open guide</button></figure><button id="lbn" aria-label="Next photo"><i class="fa-solid fa-chevron-right"></i></button></div>
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mb">
+      <button class="x" aria-label="Close" id="mx">&times;</button>
+      <div id="mc"></div>
+    </div>
+  </div>
+
+  <!-- Scripts: data first, then logic -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

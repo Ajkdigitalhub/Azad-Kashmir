@@ -1,0 +1,151 @@
+/* ==========================================================
+   Kashmir Hub - data.js
+   All editable data lives here: images, destinations, districts,
+   hospitals, helplines, directory, quiz, packing list, Urdu text.
+   ========================================================== */
+
+/* ---------- Image size suffixes ---------- */
+const Q = '?auto=format&fit=crop&w=800&q=80';
+const H = '?auto=format&fit=crop&w=1920&q=80';
+
+/* ---------- Home page hero slideshow ---------- */
+const hero = [
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMVtF0AfjjRrf2gjj6vmtoFdp5UKYs4NZLDdBNyCSexn74U9eRMqisio&s=10',
+  'https://i.ytimg.com/vi/gn41AiFNpag/sddefault.jpg',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRImwy1VzSezfBPQ46mZkPIVlHrMqx4DFfi1C7l1AmCTyRCTlE_P1VYVcPh&s=10'
+];
+
+/* ---------- Featured destinations (home page) ---------- */
+const featured = [
+  {n:'Ratti Gali Lake',t:'Neelum Valley',i:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR5mZc0o0KykemyB_JRbXx2M8YMp4EnX3zbDmiT_83-4pIarprbbny4qD3&s=10',d:'An alpine glacial lake fed by melting snow peaks, surrounded by wildflowers.'},
+  {n:'Banjosa Lake',t:'Poonch',i:'https://banjosa.org/wp-content/uploads/2023/05/banjosa-lake-thumbb.jpg',d:'An artificial scenic lake set amidst dense pine forests, ideal for boating.'},
+  {n:'Pir Chinasi',t:'Muzaffarabad',i:'https://www.pakistanhc.lk/wp-content/uploads/2019/01/places-to-visit-in-Muzaffarabad-pir-chinasi-min-5-960x640.jpg',d:'A breathtaking mountain ridge offering panoramic views of valleys.'}
+];
+
+/* ---------- All tourist places ---------- */
+const places = [
+  {n:'Ratti Gali Lake',t:'Neelum Valley • 3,683m',i:'https://s0.wklcdn.com/image_169/5075682/178067643/110951130.400x300.jpg',d:'An alpine glacial lake fed by melting snow peaks, surrounded by vibrant wildflowers and lush green plateaus. Reachable via 4x4 jeep from Dowarian followed by a scenic 1-hour trek.',s:'July - Sept',k:'Jeep & Trek Route'},
+  {n:'Banjosa Lake',t:'Poonch • 1,981m',i:'https://guidetourismpakistan.com/wp-content/uploads/2024/01/GTP_Blog_image_1024x768f_Banjosa_Lake_7.jpeg',d:'An artificial scenic lake set amidst dense pine forests and mountains, ideal for boating and family picnics. Located 18 km from Rawalakot city with fully paved roads.',s:'Year-Round',k:'Paved Access'},
+  {n:'Pir Chinasi',t:'Muzaffarabad • 2,900m',i:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-6CaNBKHhRM4Z_Uvt-RdiJmiJbZgTn5WRkw-6ON-lm4yJqirwqUtotC4E&s=10',d:'A breathtaking mountain ridge offering panoramic views of valleys, deep gorges, and mesmerizing sunset vistas. Located 30 km east of Muzaffarabad.',s:'May - Oct',k:'Paragliding Hub'},
+  {n:'Shounter Valley',t:'Neelum Valley • 3,100m',i:'https://farm6.staticflickr.com/5456/9323737303_7fd59feee8_b.jpg',d:'A picturesque valley known for its glacial stream, towering peaks, and the stunning alpine Shounter Lake. A true paradise for trekkers and off-road camping enthusiasts.',s:'June - August',k:'Off-road Adventure'},
+  {n:'Arang Kel',t:'Neelum Valley • 2,533m',i:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMdhb4DhcEvDdplPvLPMNHdXUlsK15ACWY5s1ygEqJkOoT5u7c6Y2mEkk&s=10',d:'A lush green village perched on a hilltop in Neelum Valley, accessible via a thrilling cable car ride across the roaring Kel river followed by an enchanting forest hike.',s:'May - Sept',k:'Chairlift & Trek'},
+  {n:'Toli Pir',t:'Poonch • 2,880m',i:'https://upload.wikimedia.org/wikipedia/commons/b/ba/Toli_Pir%2C_Azad_Kashmir_8.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original',d:'A high-altitude hilltop area serving as the apex ridge of the Poonch district, offering mesmerizing views of Abbaspur, Poonch river, and neighboring mountain ranges.',s:'April - Oct',k:'Sunset Point'},
+  {n:'Leepa Valley',t:'Hattian Bala • 1,921m',i:'https://beautyofpakistan.com/location/1000x500/Leepa-Valley.webp.webp',d:'Famous for its traditional wooden architecture, lush walnut orchards, cascading streams, and snow-capped peaks. One of the most fascinating and culturally rich valleys in AJK.',s:'May - Sept',k:'Traditional Culture'},
+  {n:'Ganga Choti',t:'Bagh • 3,044m',i:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCqeldIu3B2LxP1lcxsxCZoXuMjjjymiX-FIK6mjZOVT-Zxc_MR_DYsXRL&s=10',d:'Situated in the Bagh district, this majestic peak offers a stellar hiking experience with panoramic vistas overlooking both Bagh and parts of the Mansehra valley.',s:'Year-Round',k:'Hiking & Camping'},
+  {n:'Ramkot Fort',t:'Mirpur • 400m',i:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/23/ed/5e/ramkot-fort.jpg',d:'An ancient historical fortress perched atop a cliff overlooking the massive blue waters of the Mangla Dam reservoir. Accessible via a scenic boat ride from Dadyal or Mirpur.',s:'Oct - April',k:'Historical Landmark'},
+  {n:'Sudhan Gali',t:'Bagh • 2,133m',i:'https://i.pinimg.com/736x/cf/3a/c4/cf3ac4e6ba2c2d15a6405ae6bc21624e.jpg',d:'A scenic mountain pass connecting Bagh and Poonch districts. It serves as the primary base camp for trekking expeditions toward the magnificent Ganga Choti peak.',s:'May - Oct',k:'Base Camp'},
+  {n:'Sharda Village & Ruins',t:'Neelum Valley • 1,981m',i:'https://upload.wikimedia.org/wikipedia/commons/e/ed/Sharda_Bridge%2Cneelam_vellay18apr17.jpg?utm_source=en.wikivoyage.org&utm_campaign=index&utm_content=original',d:'A picturesque border village alongside the Neelum River, renowned for its ancient Sharda Peeth temple ruins, historic learning center heritage, and stunning valley views.',s:'June - Sept',k:'Ancient Heritage'},
+  {n:'Taobat Village',t:'Neelum Valley • 2,500m',i:'https://upload.wikimedia.org/wikipedia/commons/5/54/Taobat%2C_Neelum_Valley._Kashmir.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original',d:'The last picturesque station in the Neelum Valley where the crystal-clear Kishan Ganga river enters. Features pristine wooden cottages, emerald meadows, and ultimate tranquility.',s:'July - August',k:'End of Valley'}
+];
+
+/* ---------- 10 districts ---------- */
+const districts = [
+  {n:'Muzaffarabad',c:'Muzaffarabad',p:'650,000',l:'Pahari, Hindko, Urdu',h:'Abbas Institute of Medical Sciences (AIMS)',d:'Capital city of AJK, situated at the confluence of Jhelum and Neelum rivers. Rich in heritage and gateway to Neelum valley.'},
+  {n:'Neelum District',c:'Athmuqam',p:'195,000',l:'Pahari, Kashmiri, Urdu',h:'DHQ Hospital Athmuqam',d:'Famous for its stunning alpine valleys, waterfalls, Ratti Gali lake, Shounter valley, and dense pine forests.'},
+  {n:'Hattian Bala',c:'Hattian Bala',p:'230,000',l:'Pahari, Hindko, Urdu',h:'DHQ Hospital Hattian Bala',d:'Known for Leepa valley, Chakothi, historical mountain passes, and scenic river streams.'},
+  {n:'Mirpur',c:'Mirpur',p:'456,000',l:'Pahari, Punjabi, Urdu',h:'DHQ Teaching Hospital Mirpur',d:'The industrial and financial hub of AJK, famous for Mangla Dam, wide boulevards, and modern infrastructure.'},
+  {n:'Bhimber',c:'Bhimber',p:'420,000',l:'Punjabi, Pahari, Urdu',h:'DHQ Hospital Bhimber',d:'Gateway to Kashmir from Punjab, rich in Mughal heritage sites like Bhimber Fort and Baghsar Fort.'},
+  {n:'Kotli',c:'Kotli',p:'774,000',l:'Pahari, Gujri, Urdu',h:'DHQ Hospital Kotli',d:'One of the most populous districts with picturesque hills, waterfalls like Sahansa, and bustling commercial markets.'},
+  {n:'Poonch (Rawalakot)',c:'Rawalakot',p:'500,000',l:'Pahari, Gujri, Urdu',h:'DHQ Hospital Rawalakot',d:"Known as the 'Pearl Valley', featuring Banjosa Lake, Toli Pir, and pleasant summer weather."},
+  {n:'Bagh',c:'Bagh',p:'370,000',l:'Pahari, Gujri, Urdu',h:'DHQ Hospital Bagh',d:'Renowned for Sudhan Gali, Azad Pattan, picturesque mountain viewpoints, and apple orchards.'},
+  {n:'Sudhnuti (Palandri)',c:'Palandri',p:'300,000',l:'Pahari, Urdu',h:'DHQ Hospital Palandri',d:'Characterized by rugged mountainous terrain, lush green meadows, and historical significance.'},
+  {n:'Haveli',c:'Forward Kahuta',p:'152,000',l:'Pahari, Gujri, Urdu',h:'DHQ Hospital Forward Kahuta',d:'Border district known for Aliabad, Banjosa connections, and mesmerizing high-altitude pastures.'}
+];
+
+/* ---------- Hospitals ----------
+   Add a verified landline as phone:'05822-xxxxxx' to any hospital below
+   and it becomes a tap-to-call button. */
+const hospitals = [
+  {n:'Abbas Institute of Medical Sciences (AIMS)',d:'Muzaffarabad',l:'DHQ',f:'Trauma Center, ICU, 24/7 Emergency, Cardiology'},
+  {n:'CMH Muzaffarabad',d:'Muzaffarabad',l:'DHQ',f:'Military & Civilian Emergency, Operation Theater'},
+  {n:'DHQ Teaching Hospital Mirpur',d:'Mirpur',l:'DHQ',f:'Burn Unit, ICU, Dialysis, 24/7 Trauma'},
+  {n:'THQ Hospital Islamgarh',d:'Mirpur',l:'THQ',f:'Emergency OPD, Lab, Pharmacy'},
+  {n:'DHQ Hospital Rawalakot',d:'Poonch',l:'DHQ',f:'Trauma Center, Blood Bank, Pediatric Unit'},
+  {n:'THQ Hospital Hajira',d:'Poonch',l:'THQ',f:'Emergency, Basic Surgery, OPD'},
+  {n:'DHQ Hospital Athmuqam',d:'Neelum District',l:'DHQ',f:'Mountain Trauma Unit, Emergency Care'},
+  {n:'THQ Hospital Sharda',d:'Neelum District',l:'THQ',f:'Emergency Ward, First Aid Station'},
+  {n:'DHQ Hospital Kotli',d:'Kotli',l:'DHQ',f:'Emergency, ICU, Maternity Ward'},
+  {n:'THQ Hospital Sehansa',d:'Kotli',l:'THQ',f:'24/7 Emergency, Laboratory'},
+  {n:'DHQ Hospital Bagh',d:'Bagh',l:'DHQ',f:'Trauma Care, Surgery, Pediatric OPD'},
+  {n:'THQ Hospital Dhirkot',d:'Bagh',l:'THQ',f:'Emergency Care, Pharmacy'},
+  {n:'DHQ Hospital Bhimber',d:'Bhimber',l:'DHQ',f:'Emergency Care, Blood Bank, Radiology'},
+  {n:'DHQ Hospital Hattian Bala',d:'Hattian Bala',l:'DHQ',f:'Trauma Center, Emergency Ward'},
+  {n:'DHQ Hospital Palandri',d:'Sudhnuti',l:'DHQ',f:'Emergency Care, General Surgery'},
+  {n:'DHQ Hospital Forward Kahuta',d:'Haveli',l:'DHQ',f:'Emergency Ward, Basic Diagnostics'}
+];
+
+/* ---------- Emergency helplines ---------- */
+const helplines = [
+  {n:'Rescue 1122 (AJK)',s:'Emergency Ambulance & Disaster Rescue',p:'1122',r:1},
+  {n:'AJK Tourism Police',s:'Tourists Guidance & Help',p:'1422'},
+  {n:'State Disaster Management (SDMA)',s:'Landslide & Weather Alerts',p:'05822-921643'},
+  {n:'Health Department AJK',s:'Health services & information',p:'05822-920015'},
+  {n:'AJK Traffic Police',s:'Road & traffic help',p:'05822-930826'}
+];
+
+/* ---------- Hotels / Guides / Jeeps directory ----------
+   Add verified entries like {n:'Name',d:'District',p:'0300-0000000'} */
+const directory = {Hotels:[],Guides:[],Jeeps:[]};
+
+/* ---------- Destination quiz ---------- */
+const meta = {
+  'Ratti Gali Lake':[['lake','trek'],['su'],'adv'],
+  'Banjosa Lake':[['lake','view'],['su','sp','wi'],'easy'],
+  'Pir Chinasi':[['view','trek'],['su','sp'],'easy'],
+  'Shounter Valley':[['trek','lake'],['su'],'adv'],
+  'Arang Kel':[['view','trek'],['su'],'adv'],
+  'Toli Pir':[['view'],['su','sp'],'easy'],
+  'Leepa Valley':[['culture','view'],['su'],'easy'],
+  'Ganga Choti':[['trek','view'],['su','sp','wi'],'adv'],
+  'Ramkot Fort':[['culture','lake'],['sp','wi'],'easy'],
+  'Sudhan Gali':[['trek','view'],['su','sp'],'easy'],
+  'Sharda Village & Ruins':[['culture'],['su'],'easy'],
+  'Taobat Village':[['view','lake'],['su'],'adv']
+};
+const qs = [
+  {q:'What kind of trip do you want?',o:[['Lakes & water','lake'],['Trekking & adventure','trek'],['History & culture','culture'],['Views & relaxing','view']]},
+  {q:'When are you travelling?',o:[['Summer (Jun - Sep)','su'],['Spring or autumn (Apr - May, Oct)','sp'],['Winter (Nov - Mar)','wi'],["I'm flexible",'any']]},
+  {q:'How adventurous are you?',o:[['Easy roads, short walks','easy'],['Ready for jeeps and treks','adv']]}
+];
+const lab = {lake:'Lake & water',trek:'Great for trekking',culture:'History & culture',view:'Scenic views',su:'good in summer',sp:'good in spring/autumn',wi:'open in winter',easy:'easy access',adv:'adventure route'};
+const ic = {lake:'fa-water',trek:'fa-person-hiking',culture:'fa-landmark',view:'fa-mountain-sun',su:'fa-sun',sp:'fa-leaf',wi:'fa-snowflake',any:'fa-shuffle',easy:'fa-road',adv:'fa-truck-monster'};
+
+/* ---------- Access info shown in place guides ---------- */
+const acc = {
+  'Ratti Gali Lake':'4x4 jeep from Dowarian, then about a 1-hour trek',
+  'Banjosa Lake':'18 km from Rawalakot, fully paved road',
+  'Pir Chinasi':'About 30 km east of Muzaffarabad',
+  'Shounter Valley':'Jeep-only road (4x4) from the Kel side',
+  'Arang Kel':'Cable car across the Kel river, then a forest hike',
+  'Ramkot Fort':'Scenic boat ride from Dadyal or Mirpur',
+  'Sudhan Gali':'Mountain pass between Bagh and Poonch; base camp for Ganga Choti',
+  'Taobat Village':'Last station in the Neelum Valley'
+};
+
+/* ---------- Trip planner routes ---------- */
+const plans = {
+  2:['Poonch weekend',['Banjosa Lake','Toli Pir']],
+  3:['Neelum Valley classic',['Sharda Village & Ruins','Arang Kel','Taobat Village']],
+  5:['Neelum adventure',['Sharda Village & Ruins','Arang Kel','Taobat Village','Ratti Gali Lake','Shounter Valley']]
+};
+
+/* ---------- Packing list ---------- */
+const pack = ['Warm jacket and layers','Waterproof jacket','Sturdy walking shoes','Power bank','Water bottle and snacks','Sunscreen and sunglasses','Basic first aid kit','Some cash for remote areas','CNIC / photo ID','Torch or headlamp','Offline map downloaded','Emergency numbers saved (1122)'];
+
+/* ---------- Urdu translations (interface text only) ---------- */
+const UR = {"Emergency helplines": "ہنگامی ہیلپ لائنز", "Kashmir Hub": "کشمیر حب", "AJK Official Tourism, Health & Emergency Directory": "آزاد کشمیر کی سرکاری سیاحت، صحت اور ہنگامی ڈائریکٹری", "Home": "ہوم", "Districts Hub": "اضلاع", "Hospitals & Emergency": "ہسپتال اور ایمرجنسی", "Tourism & Valleys": "سیاحت اور وادیاں", "History": "تاریخ", "Contact & Support": "رابطہ اور مدد", "Rescue": "ریسکیو", "Discover the Paradise of Kashmir": "جنتِ کشمیر کو دریافت کریں", "Your digital companion for all 10 districts, DHQ/THQ hospital directories, emergency helplines, and mountain destinations of Azad Jammu & Kashmir.": "آزاد جموں و کشمیر کے تمام 10 اضلاع، ڈی ایچ کیو/ٹی ایچ کیو ہسپتالوں کی فہرست، ہنگامی ہیلپ لائنز اور پہاڑی مقامات کے لیے آپ کا ڈیجیٹل ساتھی۔", "Search portal": "تلاش کریں", "10 Districts Hub": "10 اضلاع", "DHQ/THQ Hospitals": "ڈی ایچ کیو/ٹی ایچ کیو ہسپتال", "Top Valleys": "نمایاں وادیاں", "History of AJK": "آزاد کشمیر کی تاریخ", "Emergency Contacts": "ہنگامی رابطے", "Featured Tourist Destinations": "نمایاں سیاحتی مقامات", "Alpine lakes, ridges and valleys worth the journey.": "پہاڑی جھیلیں، چوٹیاں اور وادیاں جو سفر کے قابل ہیں۔", "View all destinations": "تمام مقامات دیکھیں", "Find your perfect destination": "اپنی پسند کا مقام تلاش کریں", "Answer 3 quick questions and get places in Azad Kashmir picked for your style.": "صرف 3 سوالوں کے جواب دیں اور اپنے ذوق کے مطابق مقامات حاصل کریں۔", "All 10 Districts of Azad Kashmir": "آزاد کشمیر کے تمام 10 اضلاع", "Complete profiles for every district, including capitals, population, headquarters healthcare and administration details.": "ہر ضلع کی مکمل معلومات: صدر مقام، آبادی اور صحت کی سہولیات۔", "DHQ & THQ Hospitals Directory": "ڈی ایچ کیو اور ٹی ایچ کیو ہسپتالوں کی فہرست", "Search District Headquarters (DHQ) and Tehsil Headquarters (THQ) hospitals across AJK. In a life-threatening emergency, call Rescue 1122 first.": "آزاد کشمیر بھر کے ضلعی اور تحصیل ہیڈکوارٹر ہسپتال تلاش کریں۔ جان کو خطرہ ہو تو سب سے پہلے ریسکیو 1122 پر کال کریں۔", "All districts": "تمام اضلاع", "All": "سب", "DHQ": "ڈی ایچ کیو", "THQ": "ٹی ایچ کیو", "Hospital": "ہسپتال", "District": "ضلع", "Level": "درجہ", "Facilities & Trauma": "سہولیات اور ٹراما", "Contact": "رابطہ", "Facilities can change, so please confirm with the hospital. Landline numbers are shown only once verified. Know a correct number?": "سہولیات بدل سکتی ہیں، لہٰذا ہسپتال سے تصدیق کر لیں۔ لینڈ لائن نمبر تصدیق کے بعد ہی دکھائے جاتے ہیں۔ کیا آپ کے پاس درست نمبر ہے؟", "Send a correction": "تصحیح بھیجیں", "Tourism & Valleys Guide": "سیاحت اور وادیوں کی گائیڈ", "Guides to alpine lakes, meadows, mountain passes and heritage sites across Azad Jammu & Kashmir.": "آزاد جموں و کشمیر کی جھیلوں، سبزہ زاروں، دروں اور تاریخی مقامات کی گائیڈ۔", "This guide does not show live road or weather status because it changes quickly. Before you travel, check": "یہ گائیڈ سڑکوں یا موسم کی براہِ راست صورتحال نہیں دکھاتی کیونکہ یہ جلد بدل جاتی ہے۔ سفر سے پہلے دیکھیں:", "or ask Tourist Police on 1422.": "یا ٹورسٹ پولیس 1422 سے پوچھیں۔", "Destinations": "مقامات", "Trip planner": "ٹرپ پلانر", "Packing list": "سامان کی فہرست", "Alerts & safety": "الرٹس اور حفاظت", "Hotels & guides": "ہوٹل اور گائیڈ", "Any season": "کوئی بھی موسم", "Summer": "گرمی", "Spring / autumn": "بہار / خزاں", "Winter": "سردی", "Any difficulty": "کوئی بھی درجہ", "Easy access": "آسان رسائی", "Adventure route": "مہماتی راستہ", "Surprise me": "مجھے حیران کریں", "Saved": "محفوظ", "Pick how many days you have and get a ready route. Order can change with road and weather, so confirm with a local guide.": "بتائیں کتنے دن ہیں اور تیار روٹ حاصل کریں۔ سڑک اور موسم کے مطابق ترتیب بدل سکتی ہے، اس لیے مقامی گائیڈ سے تصدیق کر لیں۔", "2 days": "2 دن", "3 days": "3 دن", "5 days": "5 دن", "Tick items as you pack. Your progress is saved on this device.": "سامان رکھتے ہوئے نشان لگائیں۔ آپ کی پیش رفت اسی ڈیوائس پر محفوظ رہتی ہے۔", "Weather alerts & safety": "موسمی الرٹس اور حفاظت", "Check official alerts before every trip, especially in the rainy season.": "ہر سفر سے پہلے سرکاری الرٹس دیکھیں، خاص طور پر برسات میں۔", "SDMA Azad Kashmir": "ایس ڈی ایم اے آزاد کشمیر", "Official alerts and disaster information at sdma.pk": "سرکاری الرٹس اور آفات کی معلومات sdma.pk پر", "SDMA control room": "ایس ڈی ایم اے کنٹرول روم", "Rescue 1122": "ریسکیو 1122", "Ambulance and rescue": "ایمبولینس اور ریسکیو", "Altitude:": "بلندی:", "lakes such as Ratti Gali are above 3,000 m. Climb gradually, drink water, and descend if headache or nausea gets worse.": "رتی گلی جیسی جھیلیں 3,000 میٹر سے بلند ہیں۔ آہستہ چڑھیں، پانی پیتے رہیں، اور سر درد یا متلی بڑھے تو نیچے اتر آئیں۔", "Weather:": "موسم:", "mountain weather changes fast. Avoid river crossings after rain.": "پہاڑوں کا موسم تیزی سے بدلتا ہے۔ بارش کے بعد دریا یا نالے عبور نہ کریں۔", "Roads:": "سڑکیں:", "landslides can block valley roads in the monsoon. Start early and carry extra food and water.": "مون سون میں لینڈ سلائیڈنگ سے وادیوں کی سڑکیں بند ہو سکتی ہیں۔ جلد روانہ ہوں اور اضافی کھانا پانی ساتھ رکھیں۔", "Signal:": "سگنل:", "mobile coverage can be weak. Tell someone your route and save 1122.": "موبائل سگنل کمزور ہو سکتے ہیں۔ کسی کو اپنا راستہ بتا کر جائیں اور 1122 محفوظ کر لیں۔", "Respect locals:": "مقامی لوگوں کا احترام:", "dress modestly, take your litter back, and ask before photographing people.": "سادہ لباس پہنیں، کچرا واپس لے جائیں، اور تصویر لینے سے پہلے اجازت لیں۔", "Hotels, guides & jeeps": "ہوٹل، گائیڈ اور جیپ", "Only verified listings appear here.": "یہاں صرف تصدیق شدہ اندراجات دکھائے جاتے ہیں۔", "Hotels": "ہوٹل", "Guides": "گائیڈ", "Jeeps": "جیپ", "History of Azad Jammu & Kashmir": "آزاد جموں و کشمیر کی تاریخ", "A factual summary of the events that shaped the region, with a list of primary documents and books. Read the PDF online or download it to keep.": "خطے کو شکل دینے والے واقعات کا حقائق پر مبنی خلاصہ، بنیادی دستاویزات اور کتابوں کی فہرست کے ساتھ۔ پی ڈی ایف آن لائن پڑھیں یا ڈاؤن لوڈ کریں۔", "Key dates": "اہم تاریخیں", "A Brief History of Azad Jammu & Kashmir": "آزاد جموں و کشمیر کی مختصر تاریخ", "Open PDF": "پی ڈی ایف کھولیں", "Download PDF": "پی ڈی ایف ڈاؤن لوڈ کریں", "Contact & Emergency Support": "رابطہ اور ہنگامی مدد", "Reach government departments and disaster authorities, or report an incorrect number.": "سرکاری محکموں اور آفات کے اداروں سے رابطہ کریں، یا غلط نمبر کی اطلاع دیں۔", "Primary emergency contacts": "بنیادی ہنگامی رابطے", "Report incorrect number / feedback": "غلط نمبر کی اطلاع / رائے", "Help us keep hospital landlines and district data accurate.": "ہسپتالوں کے نمبر اور اضلاع کا ڈیٹا درست رکھنے میں ہماری مدد کریں۔", "Your name": "آپ کا نام", "Email or phone": "ای میل یا فون", "Message / corrected landline": "پیغام / درست لینڈ لائن", "Send feedback": "رائے بھیجیں", "Information portal for Azad Jammu & Kashmir, connecting citizens and tourists with district directories, healthcare and emergency helplines.": "آزاد جموں و کشمیر کا معلوماتی پورٹل جو شہریوں اور سیاحوں کو اضلاع کی ڈائریکٹری، صحت اور ہنگامی ہیلپ لائنز سے جوڑتا ہے۔", "Quick links": "فوری لنکس", "10 AJK Districts": "آزاد کشمیر کے 10 اضلاع", "DHQ & THQ Hospitals": "ڈی ایچ کیو اور ٹی ایچ کیو ہسپتال", "Emergency contacts": "ہنگامی رابطے", "Disclaimer": "دستبرداری", "This portal gives general guidance only and does not show live information such as road status or weather. Hospital and landline data may change. Please confirm with the relevant authority before you travel.": "یہ پورٹل صرف عمومی رہنمائی دیتا ہے اور سڑکوں یا موسم جیسی براہِ راست معلومات نہیں دکھاتا۔ ہسپتالوں اور نمبروں کی معلومات بدل سکتی ہیں۔ سفر سے پہلے متعلقہ ادارے سے تصدیق کر لیں۔", "In a severe emergency, dial 1122 immediately.": "سنگین ایمرجنسی میں فوراً 1122 ڈائل کریں۔", "Kashmir Assistant": "کشمیر اسسٹنٹ", "Drag me anywhere on the screen": "مجھے اسکرین پر کہیں بھی گھسیٹیں", "Search hospitals, districts, or valleys...": "ہسپتال، اضلاع یا وادیاں تلاش کریں...", "Filter by hospital, district or facility...": "ہسپتال، ضلع یا سہولت سے تلاش کریں...", "Search destinations...": "مقامات تلاش کریں...", "Full name": "پورا نام", "So we can verify the update": "تاکہ ہم تصدیق کر سکیں", "Which hospital or district number needs updating?": "کس ہسپتال یا ضلع کا نمبر درست کرنا ہے؟", "Ask about hospitals, places, helplines...": "ہسپتالوں، مقامات، ہیلپ لائنز کے بارے میں پوچھیں...", "Open Kashmir Hub assistant": "کشمیر حب اسسٹنٹ کھولیں", "Close assistant": "اسسٹنٹ بند کریں", "Your question": "آپ کا سوال", "Send": "بھیجیں", "Search": "تلاش", "Open menu": "مینو کھولیں", "Close": "بند کریں", "What kind of trip do you want?": "آپ کیسا سفر چاہتے ہیں؟", "Lakes & water": "جھیلیں اور پانی", "Trekking & adventure": "ٹریکنگ اور مہم جوئی", "History & culture": "تاریخ اور ثقافت", "Views & relaxing": "نظارے اور سکون", "When are you travelling?": "آپ کب سفر کر رہے ہیں؟", "Summer (Jun - Sep)": "گرمی (جون - ستمبر)", "Spring or autumn (Apr - May, Oct)": "بہار یا خزاں (اپریل - مئی، اکتوبر)", "Winter (Nov - Mar)": "سردی (نومبر - مارچ)", "I'm flexible": "میں لچکدار ہوں", "How adventurous are you?": "آپ کتنے مہم جو ہیں؟", "Easy roads, short walks": "آسان راستے، مختصر پیدل سفر", "Ready for jeeps and treks": "جیپ اور ٹریک کے لیے تیار", "Your top matches": "آپ کے بہترین انتخاب", "Start again": "دوبارہ شروع کریں", "← Back": "→ واپس", "Full guide": "مکمل گائیڈ", "Explore guide": "گائیڈ دیکھیں", "Open guide": "گائیڈ کھولیں", "Open full guide": "مکمل گائیڈ کھولیں", "Nearest hospital": "قریبی ہسپتال", "Show hospitals": "ہسپتال دکھائیں", "Open history page": "تاریخ کا صفحہ کھولیں", "Go to quiz": "کوئز پر جائیں", "Plan your visit": "سفر کی منصوبہ بندی", "Access": "رسائی", "Difficulty": "دشواری", "From Islamabad": "اسلام آباد سے", "Live distance and time in Google Maps": "گوگل میپس میں براہِ راست فاصلہ اور وقت", "Stay, food & permits": "قیام، کھانا اور اجازت نامے", "Not yet verified. Ask Tourist Police 1422": "ابھی تصدیق نہیں ہوئی۔ ٹورسٹ پولیس 1422 سے پوچھیں", "Route details not yet verified": "راستے کی تفصیل ابھی تصدیق شدہ نہیں", "Open in Google Maps": "گوگل میپس میں کھولیں", "Distance from Islamabad": "اسلام آباد سے فاصلہ", "Nearest healthcare": "قریبی طبی سہولیات", "Number not yet verified": "نمبر کی ابھی تصدیق نہیں ہوئی", "Emergency? Call 1122": "ایمرجنسی؟ 1122 پر کال کریں", "Map": "نقشہ", "Call Rescue 1122": "ریسکیو 1122 کال کریں", "Close guide": "گائیڈ بند کریں", "Save": "محفوظ کریں", "Share": "شیئر کریں", "Save as PDF": "پی ڈی ایف محفوظ کریں", "Best season": "بہترین موسم", "Highlight": "خاصیت", "Share plan": "پلان شیئر کریں", "Save plan as PDF": "پلان پی ڈی ایف میں محفوظ کریں", "Warm jacket and layers": "گرم جیکٹ اور کپڑوں کی تہیں", "Waterproof jacket": "واٹر پروف جیکٹ", "Sturdy walking shoes": "مضبوط جوتے", "Power bank": "پاور بینک", "Water bottle and snacks": "پانی کی بوتل اور کھانے کی چیزیں", "Sunscreen and sunglasses": "سن اسکرین اور دھوپ کا چشمہ", "Basic first aid kit": "ابتدائی طبی امداد کا کٹ", "Some cash for remote areas": "دور دراز علاقوں کے لیے کچھ نقد رقم", "CNIC / photo ID": "شناختی کارڈ", "Torch or headlamp": "ٹارچ", "Offline map downloaded": "آف لائن نقشہ ڈاؤن لوڈ", "Emergency numbers saved (1122)": "ہنگامی نمبر محفوظ (1122)", "You are ready for Kashmir! Safe travels.": "آپ کشمیر کے لیے تیار ہیں! سفر مبارک۔", "Good start. Keep packing.": "اچھی شروعات۔ سامان رکھتے رہیں۔", "Tick items as you pack.": "سامان رکھتے ہوئے نشان لگائیں۔", "Verified listings are being collected. Only numbers we have checked are listed here, to protect travellers from fake listings.": "تصدیق شدہ اندراجات جمع کیے جا رہے ہیں۔ مسافروں کو جعلی اندراجات سے بچانے کے لیے یہاں صرف جانچے ہوئے نمبر دکھائے جاتے ہیں۔", "Run a hotel, guide or jeep service? Send your details on WhatsApp and we will verify and list it.": "کیا آپ ہوٹل، گائیڈ یا جیپ سروس چلاتے ہیں؟ واٹس ایپ پر تفصیلات بھیجیں، ہم تصدیق کر کے شامل کر دیں گے۔", "List your service on WhatsApp": "واٹس ایپ پر اپنی سروس شامل کروائیں", "Emergency numbers": "ہنگامی نمبر", "Hospitals in Muzaffarabad": "مظفرآباد کے ہسپتال", "Best time to visit": "بہترین وقت", "Plan my trip": "میرا ٹرپ پلان", "Ratti Gali Lake": "رتی گلی جھیل", "List districts": "اضلاع کی فہرست"};
+Object.assign(UR, {
+  'Run a hotel, guide or jeep service?': 'ہوٹل، گائیڈ یا جیپ سروس چلاتے ہیں؟',
+  'Get listed on Kashmir Hub and reach visitors planning their trip. Send your details on WhatsApp and we will verify and list your service.': 'کشمیر حب پر شامل ہوں اور سفر کا منصوبہ بنانے والوں تک پہنچیں۔ واٹس ایپ پر تفصیلات بھیجیں، ہم تصدیق کر کے آپ کی سروس شامل کر دیں گے۔',
+  'List your service': 'اپنی سروس شامل کروائیں'
+});
+
+Object.assign(UR, {"First Aid": "ابتدائی طبی امداد", "First Aid Guide": "ابتدائی طبی امداد کی گائیڈ", "Simple steps for common problems in the mountains. Tap a topic to open it.": "پہاڑوں میں عام مسائل کے لیے آسان اقدامات۔ موضوع کھولنے کے لیے اس پر ٹیپ کریں۔", "Life-threatening emergency?": "جان کو خطرہ ہے؟", "Call Rescue 1122 first, then follow the steps below.": "پہلے ریسکیو 1122 کو کال کریں، پھر نیچے دیے گئے اقدامات پر عمل کریں۔", "Call 1122": "1122 کال کریں", "This is general first-aid guidance for emergencies and does not replace professional care. Always get medical help, and consider taking a certified first-aid course before you trek.": "یہ ہنگامی حالات کے لیے عمومی ابتدائی طبی امداد کی رہنمائی ہے اور پیشہ ورانہ علاج کا متبادل نہیں۔ ہمیشہ طبی مدد لیں، اور ٹریک سے پہلے فرسٹ ایڈ کا مستند کورس کرنے پر غور کریں۔", "Calling 1122: what to say": "1122 پر کال: کیا بتائیں", "Altitude sickness": "بلندی کی بیماری", "Cold and hypothermia": "سردی اور ہائپوتھرمیا", "Bleeding and wounds": "خون بہنا اور زخم", "Sprains and broken bones": "موچ اور ہڈی ٹوٹنا", "Burns": "جلنا", "Not breathing: CPR (adult)": "سانس بند: سی پی آر (بالغ)", "Choking (adult)": "گلے میں پھنسنا (بالغ)", "Heat and sun": "گرمی اور دھوپ", "Snake and insect bites": "سانپ اور کیڑوں کا کاٹنا", "Simple first-aid kit": "سادہ فرسٹ ایڈ کٹ", "Gallery": "گیلری", "A glimpse of Azad Kashmir. Tap a photo to see it full screen.": "آزاد کشمیر کی ایک جھلک۔ پوری اسکرین پر دیکھنے کے لیے تصویر پر ٹیپ کریں۔", "Photo viewer": "تصویر دیکھیں", "Previous photo": "پچھلی تصویر", "Next photo": "اگلی تصویر", "Plan your trip in minutes": "منٹوں میں اپنا سفر پلان کریں", "Pick 2, 3 or 5 days and get a ready route with the full guide of every place. Save it as a PDF.": "2، 3 یا 5 دن چنیں اور ہر مقام کی مکمل گائیڈ کے ساتھ تیار روٹ حاصل کریں۔ اسے پی ڈی ایف میں محفوظ کریں۔", "Open guide": "گائیڈ کھولیں", "Open First Aid guide": "فرسٹ ایڈ گائیڈ کھولیں"});
+
+/* Urdu patterns for text that contains numbers */
+const RX = [
+  [/^(\d+) of (\d+) destinations$/, '$1 / $2 \u0645\u0642\u0627\u0645\u0627\u062a'],
+  [/^(\d+) hospitals? found$/, '$1 \u06c1\u0633\u067e\u062a\u0627\u0644 \u0645\u0644\u06d2'],
+  [/^Almost ready\. (\d+) items to go\.$/, '\u062a\u0642\u0631\u06cc\u0628\u0627\u064b \u062a\u06cc\u0627\u0631\u06d4 $1 \u0686\u06cc\u0632\u06cc\u06ba \u0628\u0627\u0642\u06cc \u06c1\u06cc\u06ba\u06d4']
+];
+
